@@ -1,8 +1,30 @@
 {
-    "presets": [
-        ["env", { "modules": false }]
-    ],
-    "plugins": [
-        "syntax-dynamic-import"
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
     ]
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ],
+    [
+      "@babel/plugin-syntax-dynamic-import"
+    ],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ]
+  ],
+  "ignore": [
+    "dist"
+  ]
 }
