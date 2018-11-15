@@ -1,15 +1,16 @@
 import '../css/main.css';
 
-console.log('hi');
+import Haffman from './adaptiveHaffman/haffman';
 
-const i = function() {
+const haffman = new Haffman();
 
-};
+haffman.add('A');
+// haffman.add('A');
+// haffman.add('D');
+// haffman.add('C');
+// haffman.add('C');
+// haffman.add('D');
+// haffman.add('D');
 
-
-class Test {
-  hi = 1;
-  constructor() {
-    this.hi = 'hi';
-  }
-}
+console.log(haffman.existNodeList);
+console.log(haffman.rootNode);

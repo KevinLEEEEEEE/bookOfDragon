@@ -188,9 +188,6 @@
       }
     ]
   },
-  "plugins": [
-    "html"
-  ],
   "globals": {
     "document": true,
     "FileReader": true,

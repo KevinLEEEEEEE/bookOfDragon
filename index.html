@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>starts</title>
-  </head>
-  <style>
-    h1 {
-      background-image: url('./src/image/test.jpeg')
-    }
-  </style>
-  <body>
-    <h1>hiii</h1>
-    <h2>no</h2>
-    <img src="./src/image/test.jpeg" alt="">
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>starts</title>
+</head>
+<style>
+  h1 {
+    background-image: url('./src/image/test.jpeg')
+  }
+
+  .test {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 50px 50px;
+    grid-gap: 50px;
+  }
+
+  .i1 {
+    grid-column: 1 / 4;
+  }
+</style>
+
+<body>
+  <h1>hiii</h1>
+</body>
+
 </html>
