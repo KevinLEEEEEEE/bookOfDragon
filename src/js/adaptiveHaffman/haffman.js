@@ -43,11 +43,7 @@ export default class Haffman {
       this._addNode(type);
     }
 
-    console.log('');
-    console.log('【Final】current object');
-    console.log(this.rootNode);
-    console.log('');
-    console.log('------------------------------------------------');
+    this._displayFinalResult();
   }
 
   _isTypeExists(type) {
@@ -71,6 +67,49 @@ export default class Haffman {
     this.entryNode = emptyNode; // update the entry node
 
     charNode.init();
+
+    this._displayFinalResult();
+  }
+
+  _displayFinalResult() {
+    const list = this._encodeFromList();
+
+    console.log('');
+    console.log('【Final】tree');
+    console.log(this.rootNode);
+    console.log('');
+    console.log('【Final】encode');
+    console.log(list);
+    console.log('');
+    console.log('------------------------------------------------');
+  }
+
+  _encodeFromList() {
+    const codeList = {};
+
+    const encode = (node, prevCode) => {
+      if (node === null) {
+        return;
+      }
+
+      if (node.isEmptyNode() === false) {
+        const type = node.getType();
+
+        codeList[type] = prevCode;
+
+        return;
+      }
+
+      const leftNode = node.getLeftChild();
+      const rightNode = node.getRightChild();
+
+      encode(leftNode, prevCode + '0');
+      encode(rightNode, prevCode + '1');
+    };
+
+    encode(this.rootNode, '');
+
+    return codeList;
   }
 
   _addNodeToExistList(type, node) {

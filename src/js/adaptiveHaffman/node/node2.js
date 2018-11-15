@@ -78,8 +78,20 @@ export default class Node2 {
     return this.weight;
   }
 
+  getType() {
+    return this.type;
+  }
+
   getParentNode() {
     return this.parentNode;
+  }
+
+  getLeftChild() {
+    return this.leftChild;
+  }
+
+  getRightChild() {
+    return this.rightChild;
   }
 
   nodeWeightUpdateAndChildSwitch() {
