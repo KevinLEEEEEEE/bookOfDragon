@@ -1,3 +1,4 @@
+
 export default class Node {
   type;
   weight;
@@ -11,138 +12,192 @@ export default class Node {
     this.weight = weight;
   }
 
+  init() {
+    this.nodeWeightUpdateAndChildSwitch();
+  }
+
+  add() {
+    this.weight += 1;
+
+    if (this._canPassUpMessages() === true) {
+      this.parentNode.nodeWeightCompare(this);
+
+      this.parentNode.nodeWeightUpdateAndChildSwitch();
+    }
+  }
+
   isEmptyNode() {
     return this.type === 'empty';
   }
 
-  getweight() {
+  setCharNode(node) {
+    if (this._isLeftChildEmptyNode() === true) {
+      this.rightChild = node;
+    } else {
+      this.leftChild = node;
+    }
+
+    node.setParent(this);
+  }
+
+  setEmptyNode(node) {
+    if (this._isLeftChildEmptyNode() === true) {
+      this.leftChild = node;
+    } else {
+      this.rightChild = node;
+    }
+
+    node.setParent(this);
+  }
+
+  setParent(node) {
+    this.parentNode = node;
+  }
+
+  setLeftChild(node) {
+    this.leftChild = node;
+
+    node.setParent(this);
+  }
+
+  setRightChild(node) {
+    this.rightChild = node;
+
+    node.setParent(this);
+  }
+
+  getCharNode() {
+    return this._isLeftChildEmptyNode() ? this.rightChild : this.leftChild;
+  }
+
+  getEmptyNode() {
+    return this._isLeftChildEmptyNode() ? this.leftChild : this.rightChild;
+  }
+
+  getWeight() {
     return this.weight;
+  }
+
+  getType() {
+    return this.type;
   }
 
   getParentNode() {
     return this.parentNode;
   }
 
-  getCharNode() {
-    this.leftChild.isEmptyNode() === true ? this.rightChild : this.leftChild;
+  getLeftChild() {
+    return this.leftChild;
   }
 
-  setLeftChild(child) {
-    this.leftChild = child;
+  getRightChild() {
+    return this.rightChild;
   }
 
-  setRightChild(child) {
-    this.rightChild = child;
-  }
+  nodeWeightUpdateAndChildSwitch() {
+    this._weightUpdate();
 
-  setParent(parentNode) {
-    this.parentNode = parentNode;
-  }
+    this._childSwitch();
 
-  add() {
-    this.weight += 1;
-
-    this.updateNodePosition();
-
-    // this.notifyParent(this);
-  }
-
-  updateWeight() {
-
-  }
-
-  notifyWeightUpdate() {
-
-  }
-
-  notifyParent(target) {
-    if (this.parentNode !== null) {
-      this.parentNode.update(target);
+    if (this._canPassUpMessages() === true) {
+      this.parentNode.nodeWeightUpdateAndChildSwitch();
     }
   }
 
-  updateNodePosition(changedTarget) {
-    const myCharNode = this.getCharNode();
-
-    if (myCharNode !== changedTarget) {
-      const myWeight = myCharNode.getweight();
-      const targetWeight = changedTarget.getweight();
-
-      if (myWeight >= targetWeight) {
-        // change with child
-
-        this._switchNode(changedTarget);
+  nodeWeightCompare(targetNode) {
+    if (this.rightChild === targetNode) {
+      this._passUpnodeWeightCompare(targetNode); // the direct parent of changed node has no need to compare
+    } else {
+      if (this._isNodeWeightLargerThanMyCharNode(targetNode)) {
+        this._passUpnodeWeightCompare(targetNode); // larget than me, pass through
       } else {
-        // lift up for compare until root
-        if (this.parentNode !== null) {
-          this.parentNode.updateNodePosition(changedTarget);
-        } else {
-          // hit root
-
-          this._switchNode(changedTarget);
-        }
+        this._handleNodeSwitch(targetNode); // smaller or the same, switch with child
       }
     }
   }
 
-  _switchNode(changedTarget) {
-    const emptyNode = this.leftChild.isEmptyNode() === true ? this.leftChild : this.rightChild;
-    const charNodeOfEmpty = emptyNode.leftChild.isEmptyNode() === true ? emptyNode.rightChild : emptyNode.leftChild;
-
-    charNodeOfEmpty.setParent(changedTarget.getParentNode());
-
-    const charNodeOfChangedNodeParent = changedTarget.getParentNode().leftChild.isEmptyNode() === true ? changedTarget.getParentNode().rightChild : changedTarget.getParentNode().leftChild;
+  _weightUpdate() {
+    if (this.isEmptyNode() === true) {
+      this._updateWeight();
+    }
   }
 
-  _adapte(target) {
-    // const leftWeight = this._getLeftChildWeight();
-    // const rightWeight = this._getRightChildWeight();
+  _childSwitch() {
+    const leftWeight = this._getLeftChildWeight();
+    const rightAWeight = this._getRightChildWeight();
 
-    // if (rightWeight < leftWeight) {
-    //   // change position
-
-    //   const targetWeight = target.getweight();
-
-    //   if (targetWeight > rightWeight) {
-    //     // switch node
-
-    //     this._switchNode(target);
-    //   } else if (targetWeight === rightWeight) {
-    //     // switch tree
-
-    //     this._switchTree();
-    //   }
-    // } else {
-    //   console.log(target);
-    // }
+    if (leftWeight > rightAWeight) {
+      this._switchChildrenPositionOfSelf();
+    }
   }
 
-  // _switchNode(target) {
-  //   target.parentNode.setRightChild(this.rightChild);
+  _switchChildrenPositionOfSelf() {
+    const right = this.rightChild;
 
-  //   this.rightChild.setParent(target.parentNode);
+    this.setRightChild(this.leftChild);
 
-  //   this.rightChild = target;
-
-  //   target.setParent(this);
-  // }
-
-  _switchTree() {
-    const tmpLeftTree = this.leftChild;
-
-    this.leftChild = this.rightChild;
-
-    this.rightChild = tmpLeftTree;
+    this.setLeftChild(right);
   }
 
-  update(target) {
-    // this._updateWeight();
+  _passUpnodeWeightCompare(targetNode) {
+    if (this.parentNode !== null) {
+      this.parentNode.nodeWeightCompare(targetNode);
+    } else {
+      this._handleSelfNodeSwitch(targetNode);
+    }
+  }
 
-    if (this.rightChild !== target) {
-      this._adapte(target);
+  _handleSelfNodeSwitch(targetNode) {
+    const charNode = this.getCharNode();
+    const targetParentNode = targetNode.getParentNode();
+
+    if (this._isTargetNodeTheSameAsCharNode(targetNode, charNode)) {
+      return;
     }
 
-    this.notifyParent(target);
+    console.log('switch targetNode: [ type: ' + targetNode.type + ' weight: ' + targetNode.weight + ' ]');
+    console.log('with node: [ type: ' + charNode.type + ' weight: ' + charNode.weight + ' ]');
+
+    targetParentNode.setCharNode(charNode);
+
+    this.setCharNode(targetNode);
+  }
+
+  _handleNodeSwitch(targetNode) {
+    const emptyNode = this.getEmptyNode();
+    const charNode = emptyNode.getCharNode();
+    const targetParentNode = targetNode.getParentNode();
+
+    if (this._isTargetNodeTheSameAsCharNode(targetNode, charNode)) {
+      return;
+    }
+
+    console.log('switch targetNode: [ type: ' + targetNode.type + ' weight: ' + targetNode.weight + ' ]');
+    console.log('with node: [ type: ' + charNode.type + ' weight: ' + charNode.weight + ' ]');
+
+    targetParentNode.setCharNode(charNode);
+
+    emptyNode.setCharNode(targetNode);
+  }
+
+  _isTargetNodeTheSameAsCharNode(targetNode, charNode) {
+    return targetNode === charNode;
+  }
+
+  _isNodeWeightLargerThanMyCharNode(node) {
+    const charNode = this.getCharNode();
+    const maxWeight = charNode.getWeight();
+    const nodeWeight = node.getWeight();
+
+    return nodeWeight > maxWeight;
+  }
+
+  _isLeftChildEmptyNode() {
+    if (this.leftChild === null) {
+      return true;
+    } else {
+      return this.leftChild.isEmptyNode() === true;
+    }
   }
 
   _updateWeight() {
@@ -156,10 +211,14 @@ export default class Node {
   }
 
   _getLeftChildWeight() {
-    return this.leftChild !== null ? this.leftChild.getweight() : 0;
+    return this.leftChild !== null ? this.leftChild.getWeight() : 0;
   }
 
   _getRightChildWeight() {
-    return this.rightChild !== null ? this.rightChild.getweight() : 0;
+    return this.rightChild !== null ? this.rightChild.getWeight() : 0;
+  }
+
+  _canPassUpMessages() {
+    return this.parentNode !== null;
   }
 }

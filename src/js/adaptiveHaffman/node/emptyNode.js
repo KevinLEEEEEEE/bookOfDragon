@@ -1,4 +1,4 @@
-import Node from './node2';
+import Node from './node';
 
 export default class EmptyNode extends Node {
   constructor() {
