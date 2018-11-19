@@ -8,17 +8,32 @@ module.exports = {
   entry: {
     app: [
       resolve('src/js/index.js')
-    ],
+    ]
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        exclude: '/node_modules/',
         options: {
           babelrc: true,
           extends: join(__dirname + '/../.babelrc'),
         }
+      },
+      {
+        test: /\.worker\.js$/,
+        loader: 'worker-loader',
+        options: {
+          inline: true,
+          publicPath: '/src/workers/',
+          name: '/src/workers/[hash].worker.js'
+        }
+      },
+      {
+        test: /\.wasm$/,
+        type: 'javascript/auto',
+        loader: 'arraybuffer-loader',
       },
       {
         test: /\.css$/,
