@@ -1,9 +1,5 @@
 // @ts-check
 
-// import('../../wasm/main.wasm').then(modules => {
-//   console.log(modules.add(20, 3));
-// }).catch((e) => console.log(e));
-
 // @ts-ignore
 import * as test from '../../wasm/lastTest.wasm';
 

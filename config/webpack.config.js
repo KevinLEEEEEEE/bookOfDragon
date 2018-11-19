@@ -65,9 +65,26 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      inject: true,
+      filename: 'index.html',
       template: join(__dirname, '../index.html'),
       title: 'bookOfDragon',
+      chunks: ['app'],
+      cache: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: false
+      }
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: 'oldNewspaper.html',
+      template: join(__dirname, '../src/html/oldNewspaper.html'),
+      title: 'oldNewspaper',
+      cache: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: false
+      }
     })
   ],
 };
