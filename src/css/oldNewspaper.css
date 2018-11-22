@@ -1,0 +1,38 @@
+.yahei {
+  font-family: "Microsoft YaHei";
+  font-weight: bolder;
+}
+
+.sans {
+  font-family: Cursive;
+}
+
+.textDisplay {
+  animation: textDisplayAnim 2s;
+}
+
+.textHide {
+  display: none;
+  opacity: 0;
+}
+
+@keyframes textDisplayAnim {
+  0% { display: initial; opacity: 0; filter: blur(2px); }
+  100% { display: initial; opacity: 1; filter: blur(0); }
+}
+
+@-o-keyframes textDisplayAnim {
+  0% { display: initial; opacity: 0; filter: blur(2px); }
+  100% { display: initial; opacity: 1; filter: blur(0); }
+}
+
+@-moz-keyframes textDisplayAnim {
+  0% { display: initial; opacity: 0; filter: blur(2px); }
+  100% { display: initial; opacity: 1; filter: blur(0); }
+}
+
+
+@-webkit-keyframes textDisplayAnim {
+  0% { display: initial; opacity: 0; filter: blur(2px); }
+  100% { display: initial; opacity: 1; filter: blur(0); }
+}

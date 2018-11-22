@@ -1,4 +1,4 @@
-const { resolve, join } = require('path');
+const { join } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -7,8 +7,9 @@ const IS_DEV = (process.env.NODE_ENV === 'dev');
 module.exports = {
   entry: {
     app: [
-      resolve('src/js/index.js')
-    ]
+      join(__dirname, '../src/js/index.js')
+    ],
+    oldNewspaper: join(__dirname, '../src/js/oldNewspaper/index.js')
   },
   module: {
     rules: [
@@ -80,6 +81,7 @@ module.exports = {
       filename: 'oldNewspaper.html',
       template: join(__dirname, '../src/html/oldNewspaper.html'),
       title: 'oldNewspaper',
+      chunks: ['oldNewspaper'],
       cache: true,
       minify: {
         removeComments: true,
