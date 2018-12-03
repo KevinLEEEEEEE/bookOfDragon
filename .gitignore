@@ -2,3 +2,7 @@
 ## Directories
 dist/
 node_modules/
+.vscode/
+
+## Files
+env.bat
