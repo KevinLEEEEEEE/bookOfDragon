@@ -8,8 +8,7 @@ module.exports = {
   entry: {
     app: [
       join(__dirname, '../src/js/index.js')
-    ],
-    oldNewspaper: join(__dirname, '../src/js/oldNewspaper/index.js')
+    ]
   },
   resolve: {
     alias: {

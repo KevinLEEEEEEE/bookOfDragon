@@ -11,11 +11,11 @@ module.exports = merge(webpackConfig, {
     filename: 'src/js/[name].[chunkhash].js'
   },
   plugins: [
-    new UglifyJsPlugin({
-      test: /\.js(\?.*)?$/i,
-      exclude: /\.worker\.js$/,
-      sourceMap: true
-    }),
+    // new UglifyJsPlugin({
+    //   test: /\.js(\?.*)?$/i,
+    //   exclude: /\.worker\.js$/,
+    //   sourceMap: true
+    // }),
 
     new CleanWebpackPlugin(['dist'], {
       root: path.resolve(__dirname, '../'),
