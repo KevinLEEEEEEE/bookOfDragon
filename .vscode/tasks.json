@@ -1,0 +1,103 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "gcc",
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${fileBasenameNoExtension}.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "emcc_without_glue",
+      "type": "shell",
+      "command": "env && emcc",
+      "args": [
+        "${file}",
+        "-O3",
+        "-s",
+        "WASM=1",
+        "-s",
+        "SIDE_MODULE=1",
+        "-s",
+        "BINARYEN_ASYNC_COMPILATION=0",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.wasm"
+      ],
+      "group": "build"
+    },
+    {
+      "label": "emcc_with_glue",
+      "type": "shell",
+      "command": "env && emcc",
+      "args": [
+        "${file}",
+        "-O3", // code optimization
+        "-s",
+        "WASM=1", // output wasm instead of asm.js
+        "-s",
+        "MODULARIZE=1", // use Module() to initialize instead of Module.onRuntimeInitialized
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.js"
+      ],
+      "group": "build"
+    },
+    {
+      "label": "emcc_with_glue_without_optimize",
+      "type": "shell",
+      "command": "env && emcc",
+      "args": [
+        "${file}",
+        "-s",
+        "WASM=1",
+        "-s",
+        "MODULARIZE=1",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.js"
+      ],
+      "group": "build"
+    },
+    {
+      "label": "emcc_with_glue_cc",
+      "type": "shell",
+      "command": "env && emcc",
+      "args": [
+        "${file}",
+        "-O3",
+        "-s",
+        "WASM=1",
+        "-s",
+        "MODULARIZE=1",
+        "-s",
+        "EXTRA_EXPORTED_RUNTIME_METHODS=ccall",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.js"
+      ],
+      "group": "build"
+    },
+    {
+      "label": "emcc_with_glue_with_html",
+      "type": "shell",
+      "command": "env && emcc",
+      "args": [
+        "${file}",
+        "-O3",
+        "-s",
+        "WASM=1",
+        "-s",
+        "MODULARIZE=1",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.html"
+      ],
+      "group": "build"
+    }
+  ],
+}

@@ -11,6 +11,12 @@ module.exports = {
     ],
     oldNewspaper: join(__dirname, '../src/js/oldNewspaper/index.js')
   },
+  resolve: {
+    alias: {
+      lib: '../lib'
+    },
+    extensions: ['.js', '.c', '.cpp']
+  },
   module: {
     rules: [
       {
@@ -32,9 +38,10 @@ module.exports = {
         }
       },
       {
-        test: /\.wasm$/,
-        type: 'javascript/auto',
-        loader: 'arraybuffer-loader',
+        test: /\.(c|cpp)$/,
+        use: {
+          loader: 'cpp-wasm-loader'
+        }
       },
       {
         test: /\.css$/,
@@ -57,9 +64,6 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    modules: ['node_modules'],
-  },
   plugins: [
     new webpack.DefinePlugin({
       IS_DEV: IS_DEV
@@ -70,18 +74,6 @@ module.exports = {
       template: join(__dirname, '../index.html'),
       title: 'bookOfDragon',
       chunks: ['app'],
-      cache: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: false
-      }
-    }),
-
-    new HtmlWebpackPlugin({
-      filename: 'oldNewspaper.html',
-      template: join(__dirname, '../src/html/oldNewspaper.html'),
-      title: 'oldNewspaper',
-      chunks: ['oldNewspaper'],
       cache: true,
       minify: {
         removeComments: true,

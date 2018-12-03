@@ -1,29 +1,23 @@
 // @ts-check
 
 // @ts-ignore
-import * as test from '../../wasm/lastTest.wasm';
+import wasm from '../../../lib/color';
 
-var importObject = { imports: { i: arg => arg } };
+wasm.init()
+  .then((mod) => {
+    console.log(mod);
 
-function instantiate(bytes, imports) {
-  // @ts-ignore
-  return WebAssembly.compile(bytes).then(m => new WebAssembly.Instance(m, imports));
-}
+    const memory = mod.memoryManager;
+    const addr = memory.malloc(3);
 
-instantiate(test, importObject).then(instance => instance.exports.e());
+    memory.set(addr[0], 134);
+    memory.set(addr[1], 52);
+    memory.set(addr[2], 215);
 
+    mod.exports.rgbToHsl(addr[0], addr[1], addr[2]);
 
-// @ts-ignore
-// import WebWorker from './webworker.worker';
-
-// const workers = new WebWorker();
-
-// workers.addEventListener('message', (e) => {
-//   console.log(e.data);
-// });
-
-// workers.addEventListener('error', (e) => {
-//   console.log(e);
-// });
-
-// workers.postMessage({ hi: '2' });
+    console.log(memory.get(addr[0]), memory.get(addr[1]), memory.get(addr[2]));
+  }, (e) => {
+    console.log(e);
+  })
+  .catch(e => console.log(e));
