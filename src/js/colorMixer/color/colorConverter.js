@@ -58,17 +58,19 @@ export default class ColorConverter {
     const s = max === 0 ? 0 : (1 - min / max) * 100;
     const h = this._getHValue(r, g, b, min, max);
 
-    return { h: Math.round(h), s: Math.round(s), v: Math.round(v) };
+    return { h: Math.floor(h), s: Math.floor(s), v: Math.floor(v) };
   }
 
   _getHValue(r, g, b, min, max) {
+    const delta = max - min === 0 ? 0 : 1 / (max - min);
+
     switch (max) {
       case r:
-        return 60 * (g - b) / (max - min) + (g >= b ? 0 : 360);
+        return 60 * (g - b) * delta + (g >= b ? 0 : 360);
       case g:
-        return 60 * (b - r) / (max - min) + 120;
+        return 60 * (b - r) * delta + 120;
       case b:
-        return 60 * (r - g) / (max - min) + 240;
+        return 60 * (r - g) * delta + 240;
       default:
         return 0;
     }

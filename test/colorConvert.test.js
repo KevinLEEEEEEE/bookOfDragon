@@ -65,7 +65,7 @@ describe('colorConvert', function() {
   describe('rgbToHsv', function() {
     it('should convert basic rgb to hsv', function() {
       const input = { r: 152, g: 174, b: 108 };
-      const expected = { h: 80, s: 38, v: 68 };
+      const expected = { h: 80, s: 37, v: 68 };
       const res = converter.rgbToHsv(input.r, input.g, input.b);
 
       expect(res).to.be.deep.equal(expected);
@@ -73,7 +73,7 @@ describe('colorConvert', function() {
 
     it('should convert rgb more than 255 to 255', function() {
       const input = { r: 152, g: 320, b: 108 };
-      const expected = { h: 102, s: 58, v: 100 };
+      const expected = { h: 102, s: 57, v: 100 };
       const res = converter.rgbToHsv(input.r, input.g, input.b);
 
       expect(res).to.be.deep.equal(expected);
@@ -81,7 +81,7 @@ describe('colorConvert', function() {
 
     it('should convert rgb less than 0 to 0', function() {
       const input = { r: 152, g: 0, b: 108 };
-      const expected = { h: 317, s: 100, v: 60 };
+      const expected = { h: 317, s: 100, v: 59 };
       const res = converter.rgbToHsv(input.r, input.g, input.b);
 
       expect(res).to.be.deep.equal(expected);
