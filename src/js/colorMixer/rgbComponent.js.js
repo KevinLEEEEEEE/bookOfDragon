@@ -1,3 +1,5 @@
+import capital from './utils/capital';
+
 export default class rgbComponent {
   mixer;
   palette;
@@ -27,21 +29,19 @@ export default class rgbComponent {
   }
 
   addEvents() {
-    this.redPigment.addEventListener('click', this.addRed, false);
-    this.greenPigment.addEventListener('click', this.addGreen, false);
-    this.bluePigment.addEventListener('click', this.addBlue, false);
+    this.redPigment.addEventListener('squeeze', this.addColor, false);
+    this.greenPigment.addEventListener('squeeze', this.addColor, false);
+    this.bluePigment.addEventListener('squeeze', this.addColor, false);
   }
 
-  addRed = () => {
-    this.mixer.addRed(10);
-  }
+  addColor = (e) => {
+    const { color, quantity } = e.detail;
 
-  addGreen = () => {
-    this.mixer.addGreen(10);
-  }
-
-  addBlue = () => {
-    this.mixer.addBlue(10);
+    try {
+      this.mixer[`add${capital(color)}`](quantity);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   update() {

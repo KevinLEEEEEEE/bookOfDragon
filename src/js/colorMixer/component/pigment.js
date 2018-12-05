@@ -1,6 +1,7 @@
 // @ts-check
 
 const MAX_USE_TIME = 5;
+const DEFAULT_SQUEEZE_QUANTITY = 10;
 
 class Pigment extends HTMLElement {
   // @ts-ignore
@@ -13,7 +14,7 @@ class Pigment extends HTMLElement {
     return `
       <style>
         .pigmentContainer {
-          background-color: 'gray';
+          background-color: ${this.color};
           font-size: 0;
         }
 
@@ -27,6 +28,8 @@ class Pigment extends HTMLElement {
       </div>
     `;
   }
+
+  color = 'gray';
 
   surplus = 0;
 
@@ -65,7 +68,9 @@ class Pigment extends HTMLElement {
 
     switch (name) {
       case 'color':
-        this.updateColor(newValue);
+        this.color = newValue;
+
+        this.updateColor();
         break;
       case 'surplus':
         this.updateSurplus(newValue);
@@ -108,9 +113,13 @@ class Pigment extends HTMLElement {
       case 2:
       case 1:
         this.squeezeAnimation();
+
+        this.dispatchSqueezeEvent();
         break;
       case 0:
         this.squeezeAnimation();
+
+        this.dispatchSqueezeEvent();
 
         this.dispatchUseupEvent();
         break;
@@ -120,6 +129,20 @@ class Pigment extends HTMLElement {
 
   squeezeAnimation() {
     this.imageNode.setAttribute('src', `./src/image/pigment${this.surplus}.png`);
+  }
+
+  dispatchSqueezeEvent() {
+    const squeezeEvent = new CustomEvent('squeeze', {
+      detail: {
+        color: this.color,
+        quantity: DEFAULT_SQUEEZE_QUANTITY,
+      },
+      bubbles: true,
+      cancelable: true,
+      composed: true, // cross the shadow dom
+    });
+
+    this.shadowRoot.dispatchEvent(squeezeEvent);
   }
 
   dispatchUseupEvent() {
@@ -132,10 +155,10 @@ class Pigment extends HTMLElement {
     this.shadowRoot.dispatchEvent(useupEvent);
   }
 
-  updateColor(color) {
+  updateColor() {
     this.styleNode.textContent = `
       .pigmentContainer {
-        background-color: ${color};
+        background-color: ${this.color};
         font-size: 0;
       }
 
@@ -144,7 +167,7 @@ class Pigment extends HTMLElement {
       }
     `;
 
-    this.imageNode.setAttribute('alt', `${color} pigment`);
+    this.imageNode.setAttribute('alt', `${this.color} pigment`);
   }
 
   updateSurplus(value) {

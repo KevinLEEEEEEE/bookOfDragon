@@ -18,9 +18,13 @@ class PigmentContainer extends HTMLElement {
 
         .usedPigment {
           position: absolute;
-          left: 66px;
+          top: 0;
+          right: 0;
           bottom: 0;
+          left: 0;
           display: flex;
+          pointer-events: none;
+          user-select: none;
         }
         
         .usedPigment simple-pigment{
