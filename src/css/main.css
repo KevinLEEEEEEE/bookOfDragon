@@ -1,40 +1,39 @@
-.pigment {
-  position: absolute;
-  left: 200px;
-}
 
-.paletteContainer {
+.rgbMixer {
   position: relative;
 }
 
-.paletteCore {
+.pigment {
   position: absolute;
-  left: 31%;
-  top: 34%;
-  background-color: red;
-  transform: scale(1);
 }
 
-.rotate30 {
-  transform: rotate(30deg);
-  -ms-transform: rotate(30deg);		/* IE 9 */
-  -webkit-transform: rotate(30deg);	/* Safari and Chrome */
-  -o-transform: rotate(30deg);		/* Opera */
-  -moz-transform: rotate(30deg);		/* Firefox */
+.pig1 {
+  top: 0;
+  left: 450px;
 }
 
-.rotate60 {
-  transform: rotate(60deg);
-  -ms-transform: rotate(60deg);		/* IE 9 */
-  -webkit-transform: rotate(60deg);	/* Safari and Chrome */
-  -o-transform: rotate(60deg);		/* Opera */
-  -moz-transform: rotate(60deg);		/* Firefox */
+.pig2 {
+  top: 700px;
+  left: 850px;
 }
 
-.rotate90 {
-  transform: rotate(90deg);
-  -ms-transform: rotate(90deg);		/* IE 9 */
-  -webkit-transform: rotate(90deg);	/* Safari and Chrome */
-  -o-transform: rotate(90deg);		/* Opera */
-  -moz-transform: rotate(90deg);		/* Firefox */
+.pig3 {
+  top: 750px;
+  left: 50px;
+}
+
+.rotate120 {
+  transform: rotate(120deg);
+  -ms-transform: rotate(120deg);		/* IE 9 */
+  -webkit-transform: rotate(120deg);	/* Safari and Chrome */
+  -o-transform: rotate(120deg);		/* Opera */
+  -moz-transform: rotate(120deg);		/* Firefox */
+}
+
+.rotate240 {
+  transform: rotate(240deg);
+  -ms-transform: rotate(240deg);		/* IE 9 */
+  -webkit-transform: rotate(240deg);	/* Safari and Chrome */
+  -o-transform: rotate(240deg);		/* Opera */
+  -moz-transform: rotate(240deg);		/* Firefox */
 }

@@ -1,7 +1,9 @@
 // @ts-check
 
 import ColorConverter from './colorConverter';
+import observer from '../utils/observer';
 
+@observer
 export default class RgbMixer {
   rgb = { r: 0, g: 0, b: 0 };
   hsv;
@@ -97,6 +99,9 @@ export default class RgbMixer {
     this._updateHsv();
 
     this._updateQuantity(quantity);
+
+    // @ts-ignore
+    this.notify();
   }
 
   _updateRgb(r, g, b, quantity) {

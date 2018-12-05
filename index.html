@@ -11,16 +11,14 @@
 <body>
   <h1>index</h1>
 
-  <pigment-container></pigment-container>
+  <div class="rgbMixer" id="rgbComponent">
+    <simple-palette color='red' scale='0.3'></simple-palette>
+    <pigment-container color='red' class="pigment pig1"></pigment-container>
+    <pigment-container color='green' class="pigment pig2 rotate120"></pigment-container>
+    <pigment-container color='blue' class="pigment pig3 rotate240"></pigment-container>
+  </div>
 
-  <!-- <div class="palette">
-    <div class="paletteContainer">
-      <img src="./src/image/paletteCore.png" alt="palette core" class="paletteCore">
-      <img src="./src/image/paletteBorder.jpg" alt="palette border">
-    </div>
-  </div> -->
 
-  <simple-palette color='red'></simple-palette>
 
 </body>
 

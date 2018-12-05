@@ -6,13 +6,14 @@ const MAX_SCALE_RATIO = 1;
 class Palette extends HTMLElement {
   // @ts-ignore
   static get observedAttributes() {
-    return ['color'];
+    return ['color', 'scale'];
   }
 
   // @ts-ignore
   get template() {
     return `
       <style>
+        ${this.styleText}
       </style>
 
       <div class="palette">
@@ -25,21 +26,20 @@ class Palette extends HTMLElement {
   // @ts-ignore
   get styleText() {
     return `
-      .paletteContainer {
+      .palette {
         position: relative;
+        overflow: hidden;
       }
       
       .paletteCore {
         position: absolute;
-        left: 31%;
-        top: 50%;
+        left: 25%;
+        top: 35%;
         background-color: ${this.color};
         transform: scale(${this.scale});
       }
     `;
   }
-
-  palette;
 
   styleNode;
 
@@ -55,8 +55,6 @@ class Palette extends HTMLElement {
     shadow.innerHTML = this.template;
 
     this.initNodes();
-
-    this.updateStyle();
   }
 
   connectedCallback() {
@@ -74,17 +72,21 @@ class Palette extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     console.log('Custom square element attributes changed.');
 
-    this.updateColor(newValue);
+    switch (name) {
+      case 'color':
+        this.updateColor(newValue);
+        break;
+      case 'scale':
+        this.updateScaleRatio(newValue);
+        break;
+      default:
+    }
   }
 
   initNodes() {
     const ele = this.shadowRoot;
 
-    this.palette = ele.querySelector('img');
-
     this.styleNode = ele.querySelector('style');
-
-    console.log(this.styleNode);
   }
 
   updateColor(color) {
@@ -93,10 +95,14 @@ class Palette extends HTMLElement {
     this.updateStyle();
   }
 
-  updateScaleRatio(ratio) {
-    this.scale = ratio;
+  updateScaleRatio(value) {
+    const ratio = parseFloat(value);
 
-    this.updateStyle();
+    if (!isNaN(ratio) && ratio <= MAX_SCALE_RATIO && ratio >= DEFAULT_SCALE_RATIO) {
+      this.scale = ratio;
+
+      this.updateStyle();
+    }
   }
 
   updateStyle() {

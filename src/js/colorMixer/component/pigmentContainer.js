@@ -1,5 +1,7 @@
 // @ts-check
 
+const DEFAULT_SURPLUS = 5;
+
 class PigmentContainer extends HTMLElement {
   // @ts-ignore
   static get observedAttributes() {
@@ -31,7 +33,7 @@ class PigmentContainer extends HTMLElement {
       </style>
 
       <div class='pigment'>
-        <simple-pigment color='red' surplus='5' class='currentPigment'></simple-pigment>
+        <simple-pigment color='gray' surplus='${DEFAULT_SURPLUS}' class='currentPigment'></simple-pigment>
         <div class="usedPigment"></div>
       </div>
     `;
@@ -73,6 +75,8 @@ class PigmentContainer extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     console.log('Custom square element attributes changed.');
+
+    this.updateColor(newValue);
   }
 
   initNodes() {
@@ -103,6 +107,10 @@ class PigmentContainer extends HTMLElement {
     const usedPigment = document.createElement('simple-pigment');
 
     this.usedPigmentContainer.appendChild(usedPigment);
+  }
+
+  updateColor(value) {
+    this.currentPigment.setAttribute('color', value);
   }
 }
 
