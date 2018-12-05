@@ -1,0 +1,40 @@
+.pigment {
+  position: absolute;
+  left: 200px;
+}
+
+.paletteContainer {
+  position: relative;
+}
+
+.paletteCore {
+  position: absolute;
+  left: 31%;
+  top: 34%;
+  background-color: red;
+  transform: scale(1);
+}
+
+.rotate30 {
+  transform: rotate(30deg);
+  -ms-transform: rotate(30deg);		/* IE 9 */
+  -webkit-transform: rotate(30deg);	/* Safari and Chrome */
+  -o-transform: rotate(30deg);		/* Opera */
+  -moz-transform: rotate(30deg);		/* Firefox */
+}
+
+.rotate60 {
+  transform: rotate(60deg);
+  -ms-transform: rotate(60deg);		/* IE 9 */
+  -webkit-transform: rotate(60deg);	/* Safari and Chrome */
+  -o-transform: rotate(60deg);		/* Opera */
+  -moz-transform: rotate(60deg);		/* Firefox */
+}
+
+.rotate90 {
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg);		/* IE 9 */
+  -webkit-transform: rotate(90deg);	/* Safari and Chrome */
+  -o-transform: rotate(90deg);		/* Opera */
+  -moz-transform: rotate(90deg);		/* Firefox */
+}
