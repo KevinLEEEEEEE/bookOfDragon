@@ -1,6 +1,8 @@
 
 .rgbMixer {
-  position: relative;
+  position: absolute;
+  left: 100px;
+  top: 100px;
 }
 
 .pigment {
@@ -8,8 +10,8 @@
 }
 
 .pig1 {
-  top: 0;
-  left: 450px;
+  top: -200px;
+  left: 200px;
 }
 
 .pig2 {
@@ -20,6 +22,14 @@
 .pig3 {
   top: 750px;
   left: 50px;
+}
+
+.rotater80 {
+  transform: rotate(-80deg);
+  -ms-transform: rotate(-80deg);		/* IE 9 */
+  -webkit-transform: rotate(-80deg);	/* Safari and Chrome */
+  -o-transform: rotate(-80deg);		/* Opera */
+  -moz-transform: rotate(-80deg);		/* Firefox */
 }
 
 .rotate120 {

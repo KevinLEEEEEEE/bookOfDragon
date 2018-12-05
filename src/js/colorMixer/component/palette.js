@@ -33,8 +33,8 @@ class Palette extends HTMLElement {
       
       .paletteCore {
         position: absolute;
-        left: 25%;
-        top: 35%;
+        left: 330px;
+        top: 330px;
         background-color: ${this.color};
         transform: scale(${this.scale});
       }

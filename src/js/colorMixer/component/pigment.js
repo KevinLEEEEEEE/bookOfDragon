@@ -12,12 +12,19 @@ class Pigment extends HTMLElement {
   get template() {
     return `
       <style>
-        img {
-          background-color: gray;
+        .pigmentContainer {
+          background-color: 'gray';
+          font-size: 0;
+        }
+
+        img { 
+          transform: scale(1.02);
         }
       </style>
 
-      <img src="./src/image/pigment0.png" alt="pigment">
+      <div class='pigmentContainer'>
+        <img src="./src/image/pigment0.png" alt="pigment">
+      </div>
     `;
   }
 
@@ -127,8 +134,13 @@ class Pigment extends HTMLElement {
 
   updateColor(color) {
     this.styleNode.textContent = `
-      img {
+      .pigmentContainer {
         background-color: ${color};
+        font-size: 0;
+      }
+
+      img { 
+        transform: scale(1.01);
       }
     `;
 
