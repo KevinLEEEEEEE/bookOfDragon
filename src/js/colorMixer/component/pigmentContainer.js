@@ -18,21 +18,15 @@ class PigmentContainer extends HTMLElement {
 
         .usedPigment {
           position: absolute;
-          top: 0;
+          top: -100px;
           right: 0;
-          bottom: 0;
           left: 0;
           display: flex;
+          justify-content: center;
           pointer-events: none;
-          user-select: none;
         }
         
         .usedPigment simple-pigment{
-          transform: scale(.5);
-        }
-        
-        .usedPigment simple-pigment:not(:first-child){
-          margin-left: -6%;
         }
       </style>
 
@@ -57,18 +51,16 @@ class PigmentContainer extends HTMLElement {
     shadow.innerHTML = this.template;
 
     this.initNodes();
-
-    this.addUsedPigment();
   }
 
   connectedCallback() {
-    console.log('Custom square element added to page.');
+    // console.log('Custom square element added to page.');
 
     this.attachEvents();
   }
 
   disconnectedCallback() {
-    console.log('Custom square element removed from page.');
+    // console.log('Custom square element removed from page.');
 
     this.removeEvents();
   }
@@ -78,7 +70,7 @@ class PigmentContainer extends HTMLElement {
   // }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log('Custom square element attributes changed.');
+    // console.log('Custom square element attributes changed.');
 
     this.updateColor(newValue);
   }

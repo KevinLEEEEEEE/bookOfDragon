@@ -49,7 +49,7 @@ export default class RgbMixer {
     this._mixColor(255, 255, 0, quantity);
   }
 
-  addOlivine(quantity) { // 黄绿
+  addChartreuse(quantity) { // 黄绿
     this._mixColor(127, 255, 0, quantity);
   }
 
@@ -57,7 +57,7 @@ export default class RgbMixer {
     this._mixColor(0, 255, 0, quantity);
   }
 
-  addViridity(quantity) { // 青绿
+  addSpringgreen(quantity) { // 青绿
     this._mixColor(0, 255, 127, quantity);
   }
 
@@ -77,7 +77,7 @@ export default class RgbMixer {
     this._mixColor(127, 0, 255, quantity);
   }
 
-  addFuchsin(quantity) {
+  addFuchsia(quantity) {
     this._mixColor(255, 0, 255, quantity);
   }
 

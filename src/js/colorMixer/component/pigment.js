@@ -13,14 +13,7 @@ class Pigment extends HTMLElement {
   get template() {
     return `
       <style>
-        .pigmentContainer {
-          background-color: ${this.color};
-          font-size: 0;
-        }
-
-        img { 
-          transform: scale(1.02);
-        }
+        ${this.styleText}
       </style>
 
       <div class='pigmentContainer'>
@@ -29,9 +22,23 @@ class Pigment extends HTMLElement {
     `;
   }
 
+  // @ts-ignore
+  get styleText() {
+    return `
+      .pigmentContainer {
+        background-color: ${this.color};
+        font-size: 0;
+      }
+
+      img { 
+        transform: scale(1.02);
+      }
+    `;
+  }
+
   color = 'gray';
 
-  surplus = 0;
+  surplus = MAX_USE_TIME;
 
   styleNode;
 
@@ -48,13 +55,13 @@ class Pigment extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log('Custom square element added to page.');
+    // console.log('Custom square element added to page.');
 
     this.attachEvents();
   }
 
   disconnectedCallback() {
-    console.log('Custom square element removed from page.');
+    // console.log('Custom square element removed from page.');
 
     this.removeEvents();
   }
@@ -64,7 +71,7 @@ class Pigment extends HTMLElement {
   // }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log('Custom square element attributes changed.');
+    console.log('Custom square element attributes changed.' + newValue);
 
     switch (name) {
       case 'color':
@@ -117,8 +124,6 @@ class Pigment extends HTMLElement {
         this.dispatchSqueezeEvent();
         break;
       case 0:
-        this.squeezeAnimation();
-
         this.dispatchSqueezeEvent();
 
         this.dispatchUseupEvent();
@@ -156,16 +161,7 @@ class Pigment extends HTMLElement {
   }
 
   updateColor() {
-    this.styleNode.textContent = `
-      .pigmentContainer {
-        background-color: ${this.color};
-        font-size: 0;
-      }
-
-      img { 
-        transform: scale(1.01);
-      }
-    `;
+    this.styleNode.textContent = this.styleText;
 
     this.imageNode.setAttribute('alt', `${this.color} pigment`);
   }

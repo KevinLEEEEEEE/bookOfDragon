@@ -6,9 +6,6 @@ export default class rgbComponent {
   mixer;
   palette;
   component;
-  redPigment;
-  greenPigment;
-  bluePogment;
 
   constructor(mixer, node) {
     this.mixer = mixer;
@@ -25,27 +22,37 @@ export default class rgbComponent {
   }
 
   initNode(node) {
-    this.palette = node.querySelector('simple-palette');
+    this.palette = node.querySelector('dial-palette');
   }
 
   addEvents() {
     this.component.addEventListener('squeeze', this.addColor, false);
+
+    this.component.addEventListener('useup', this.useup, false);
   }
 
   addColor = (e) => {
-    const { color, quantity } = e.detail;
+    let { color, quantity } = e.detail;
 
     try {
+      if (color === '#ff007f') {
+        color = 'purplishRed';
+      }
+
       this.mixer[`add${capital(color)}`](quantity);
     } catch (err) {
       console.log(err);
     }
   }
 
+  useup = (e) => {
+    e.target.setAttribute('surplus', 5);
+  }
+
   update() {
     this.updateColor();
 
-    this.updateSize();
+    this.updateRotation();
   }
 
   updateColor() {
@@ -54,18 +61,6 @@ export default class rgbComponent {
     this.palette.setAttribute('color', `rgb(${r}, ${g}, ${b})`);
   }
 
-  updateSize() {
-    const quantity = this.mixer.getQuantity();
-    const ratio = this.getScaleRatioFronQuantity(quantity);
-
-    this.palette.setAttribute('scale', ratio);
-  }
-
-  getScaleRatioFronQuantity(quantity) {
-    if (quantity <= 1500) {
-      return (-0.7 / (1500 ** 2)) * (quantity ** 2) + (1.4 / 1500) * quantity + 0.3;
-    }
-
-    return 1;
+  updateRotation() {
   }
 }

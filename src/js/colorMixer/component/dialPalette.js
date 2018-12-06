@@ -1,12 +1,14 @@
 // @ts-check
 
-const DEFAULT_SCALE_RATIO = 0.3;
-const MAX_SCALE_RATIO = 1;
+import ColorConverter from '../color/colorConverter';
 
-class Palette extends HTMLElement {
+const MAX_ROTATION = 360;
+const MIN_ROTATION = 0;
+
+class DialPalette extends HTMLElement {
   // @ts-ignore
   static get observedAttributes() {
-    return ['color', 'scale'];
+    return ['color'];
   }
 
   // @ts-ignore
@@ -16,9 +18,8 @@ class Palette extends HTMLElement {
         ${this.styleText}
       </style>
 
-      <div class="palette">
-        <img src="./src/image/paletteCore.png" alt="palette core" class="paletteCore">
-        <img src="./src/image/paletteBorder.jpg" alt="palette border">
+      <div class="dial">
+        <img src="./src/image/dial.png" alt="dial">
       </div>
     `;
   }
@@ -26,29 +27,32 @@ class Palette extends HTMLElement {
   // @ts-ignore
   get styleText() {
     return `
-      .palette {
-        position: relative;
-        overflow: hidden;
-      }
-      
-      .paletteCore {
-        position: absolute;
-        left: 330px;
-        top: 330px;
+      .dial {
+        font-size: 0;
+        overflow: hideen;
+        border-radius: 100%;
         background-color: ${this.color};
-        transform: scale(${this.scale});
+        transform: rotate(${this.rotation}deg);
+        -ms-transform: rotate(${this.rotation}deg);
+        -webkit-transform: rotate(${this.rotation}deg);
+        -o-transform: rotate(${this.rotation}deg);
+        -moz-transform: rotate(${this.rotation}deg);
       }
     `;
   }
 
   styleNode;
 
-  scale = DEFAULT_SCALE_RATIO;
+  rotation = 0;
 
   color = 'gray';
 
+  colorConverter;
+
   constructor() {
     super();
+
+    this.colorConverter = new ColorConverter();
 
     const shadow = this.attachShadow({ mode: 'open' });
 
@@ -76,9 +80,6 @@ class Palette extends HTMLElement {
       case 'color':
         this.updateColor(newValue);
         break;
-      case 'scale':
-        this.updateScaleRatio(newValue);
-        break;
       default:
     }
   }
@@ -92,16 +93,22 @@ class Palette extends HTMLElement {
   updateColor(color) {
     this.color = color;
 
+    this.updateRotation();
+
     this.updateStyle();
   }
 
-  updateScaleRatio(value) {
-    const ratio = parseFloat(value);
+  updateRotation() {
+    const regexp = /(rgb[(])(\d{1,3})(, )(\d{1,3})(, )(\d{1,3})([)])/;
 
-    if (!isNaN(ratio) && ratio <= MAX_SCALE_RATIO && ratio >= DEFAULT_SCALE_RATIO) {
-      this.scale = ratio;
+    try {
+      const [, , r, , g, , b] = regexp.exec(this.color);
 
-      this.updateStyle();
+      const { h } = this.colorConverter.rgbToHsv(parseInt(r), parseInt(g), parseInt(b));
+
+      this.rotation = h;
+    } catch (err) {
+
     }
   }
 
@@ -110,4 +117,4 @@ class Palette extends HTMLElement {
   }
 }
 
-customElements.define('simple-palette', Palette);
+customElements.define('dial-palette', DialPalette);
