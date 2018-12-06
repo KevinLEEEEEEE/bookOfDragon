@@ -2,7 +2,7 @@
 
 import capital from './utils/capital';
 
-export default class rgbComponent {
+export default class DialComponent {
   mixer;
   palette;
   component;

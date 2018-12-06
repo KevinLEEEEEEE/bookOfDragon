@@ -71,7 +71,7 @@ class Pigment extends HTMLElement {
   // }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log('Custom square element attributes changed.' + newValue);
+    // console.log('Custom square element attributes changed.' + newValue);
 
     switch (name) {
       case 'color':

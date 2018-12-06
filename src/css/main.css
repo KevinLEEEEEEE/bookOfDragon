@@ -8,16 +8,15 @@
 .dialMixer {
   position: absolute;
   left: 2500px;
-  top: 1000px;
+  top: 1100px;
   width: 1200px;
   height: 1200px;
 }
 
-.workbench {
+.shadeCanvas {
   position: absolute;
-  top: 500px;
-  left: 2000px;
-  transform: scale(2);
+  top: 0;
+  left: 1800px;
 }
 
 .pigment {
