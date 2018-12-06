@@ -10,26 +10,44 @@ export default class CanvasComponent {
 
     this.component = node;
 
-    this.initNode(node);
+    this.initNode();
+
+    this.addEvents();
 
     this.filter.register(this);
   }
 
-  initNode(node) {
-    this.shadeCanvas = node.querySelector('shade-canvas');
+  initNode() {
+    this.shadeCanvas = this.component.querySelector('shade-canvas');
   }
 
   addEvents() {
+    this.shadeCanvas.addEventListener('reset', this.reset, false);
+
     this.shadeCanvas.addEventListener('fade', this.fade, false);
   }
 
-  fade = () => {
-    this.filter.setSaturationAmplify(-0.1);
+  removeEvents() {
+    this.shadeCanvas.removeEventListener('reset', this.reset, false);
+  }
+
+  reset = (e) => {
+    e.stopPropagation();
+
+    this.filter.setSaturationAmplifyOnce(100);
+  }
+
+  fade = (e) => {
+    e.stopPropagation();
+
+    this.filter.setSaturationAmplify(-1);
   }
 
   update() {
-    console.log('update');
+    this.updateCanvasFillColor(this.filter.getRgb());
+  }
 
-    console.log(this.filter.getRgb());
+  updateCanvasFillColor({ r, g, b }) {
+    this.shadeCanvas.setAttribute('color', `rgb(${r}, ${g}, ${b})`);
   }
 }

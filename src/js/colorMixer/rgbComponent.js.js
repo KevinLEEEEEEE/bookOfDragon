@@ -35,6 +35,8 @@ export default class RgbComponent {
   addColor = (e) => {
     const { color, quantity } = e.detail;
 
+    e.stopPropagation();
+
     try {
       this.mixer[`add${capital(color)}`](quantity);
     } catch (err) {

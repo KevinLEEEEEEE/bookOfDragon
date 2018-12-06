@@ -34,6 +34,8 @@ export default class DialComponent {
   addColor = (e) => {
     let { color, quantity } = e.detail;
 
+    e.stopPropagation();
+
     try {
       if (color === '#ff007f') {
         color = 'purplishRed';
@@ -46,6 +48,8 @@ export default class DialComponent {
   }
 
   useup = (e) => {
+    e.stopPropagation();
+
     e.target.setAttribute('surplus', 5);
   }
 

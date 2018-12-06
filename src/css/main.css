@@ -29,6 +29,17 @@
   top: 300px;
 }
 
+.lamp {
+  position: absolute;
+  top: 500px;
+  left: 1700px;
+  transform: scale(2) rotate(30deg);
+  -ms-transform: scale(2) rotate(30deg);		/* IE 9 */
+  -webkit-transform: scale(2) rotate(30deg);	/* Safari and Chrome */
+  -o-transform: scale(2) rotate(30deg);		/* Opera */
+  -moz-transform: scale(2) rotate(30deg);		/* Firefox */
+}
+
 .pig1 {
   top: -200px;
   left: 300px;
