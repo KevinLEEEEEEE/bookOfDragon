@@ -14,7 +14,6 @@ class Lamp extends HTMLElement {
       </style>
 
       <div class="lamp">
-        <img src="./src/image/pikachu.png" alt="lamp">
       </div>
     `;
   }
@@ -23,6 +22,9 @@ class Lamp extends HTMLElement {
   get styleText() {
     return `
       .lamp {
+        width: 100px;
+        height: 100px;
+        background-color: gray;
       }
     `;
   }
