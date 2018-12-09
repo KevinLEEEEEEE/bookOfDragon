@@ -1,4 +1,25 @@
 
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(5, 5, 5);
+}
+
+.littlePrince {
+  position: absolute;
+  top: 550px;
+  left: 1300px;
+}
+
+.prince {
+  position: absolute;
+  left: 1000px;
+  top: -275px;
+}
+
 .rgbMixer {
   position: absolute;
   left: 250px;
@@ -15,8 +36,12 @@
 
 .shadeCanvas {
   position: absolute;
-  top: 0;
-  left: 1800px;
+  top: 300px;
+  left: 300px;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 .pigment {
@@ -32,12 +57,14 @@
 .lamp {
   position: absolute;
   top: 500px;
-  left: 1700px;
-  transform: scale(2) rotate(30deg);
-  -ms-transform: scale(2) rotate(30deg);		/* IE 9 */
-  -webkit-transform: scale(2) rotate(30deg);	/* Safari and Chrome */
-  -o-transform: scale(2) rotate(30deg);		/* Opera */
-  -moz-transform: scale(2) rotate(30deg);		/* Firefox */
+  left: 0;
+}
+
+.moon {
+  position: absolute;
+  left: 200px;
+  top: 150px;
+  transform: scale(1.5);
 }
 
 .pig1 {
@@ -115,20 +142,12 @@
   left: 200px;
 }
 
-.rotate0 {
-  transform: scale(0.5);
-  -ms-transform: scale(0.5);		/* IE 9 */
-  -webkit-transform: scale(0.5);	/* Safari and Chrome */
-  -o-transform: scale(0.5);		/* Opera */
-  -moz-transform: scale(0.5);		/* Firefox */
-}
-
 .rotate30 {
-  transform: scale(0.5) rotate(30deg);
-  -ms-transform: scale(0.5) rotate(30deg);		/* IE 9 */
-  -webkit-transform: scale(0.5) rotate(30deg);	/* Safari and Chrome */
-  -o-transform: scale(0.5) rotate(30deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(30deg);		/* Firefox */
+  transform: rotate(30deg);
+  -ms-transform: rotate(30deg);		/* IE 9 */
+  -webkit-transform: rotate(30deg);	/* Safari and Chrome */
+  -o-transform: rotate(30deg);		/* Opera */
+  -moz-transform: rotate(30deg);		/* Firefox */
 }
 
 .rotate60 {
@@ -136,7 +155,7 @@
   -ms-transform: rotate(60deg);		/* IE 9 */
   -webkit-transform: rotate(60deg);	/* Safari and Chrome */
   -o-transform: rotate(60deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(60deg);		/* Firefox */
+  -moz-transform: rotate(60deg);		/* Firefox */
 }
 
 .rotate90 {
@@ -144,7 +163,7 @@
   -ms-transform: rotate(90deg);		/* IE 9 */
   -webkit-transform: rotate(90deg);	/* Safari and Chrome */
   -o-transform: rotate(90deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(90deg);		/* Firefox */
+  -moz-transform: rotate(90deg);		/* Firefox */
 }
 
 .rotate120 {
@@ -152,7 +171,7 @@
   -ms-transform: rotate(120deg);		/* IE 9 */
   -webkit-transform: rotate(120deg);	/* Safari and Chrome */
   -o-transform: rotate(120deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(120deg);		/* Firefox */
+  -moz-transform: rotate(120deg);		/* Firefox */
 }
 
 .rotate150 {
@@ -160,7 +179,7 @@
   -ms-transform: rotate(150deg);		/* IE 9 */
   -webkit-transform: rotate(150deg);	/* Safari and Chrome */
   -o-transform: rotate(150deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(150deg);		/* Firefox */
+  -moz-transform: rotate(150deg);		/* Firefox */
 }
 
 .rotate180 {
@@ -168,7 +187,7 @@
   -ms-transform: rotate(180deg);		/* IE 9 */
   -webkit-transform: rotate(180deg);	/* Safari and Chrome */
   -o-transform: rotate(180deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(180deg);		/* Firefox */
+  -moz-transform: rotate(180deg);		/* Firefox */
 }
 
 .rotate210 {
@@ -176,7 +195,7 @@
   -ms-transform: rotate(210deg);		/* IE 9 */
   -webkit-transform: rotate(210deg);	/* Safari and Chrome */
   -o-transform: rotate(210deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(210deg);		/* Firefox */
+  -moz-transform: rotate(210deg);		/* Firefox */
 }
 
 .rotate240 {
@@ -184,7 +203,7 @@
   -ms-transform: rotate(240deg);		/* IE 9 */
   -webkit-transform: rotate(240deg);	/* Safari and Chrome */
   -o-transform: rotate(240deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(240deg);		/* Firefox */
+  -moz-transform: rotate(240deg);		/* Firefox */
 }
 
 .rotate270 {
@@ -192,7 +211,7 @@
   -ms-transform: rotate(270deg);		/* IE 9 */
   -webkit-transform: rotate(270deg);	/* Safari and Chrome */
   -o-transform: rotate(270deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(270deg);		/* Firefox */
+  -moz-transform: rotate(270deg);		/* Firefox */
 }
 
 .rotate300 {
@@ -200,7 +219,7 @@
   -ms-transform: rotate(300deg);		/* IE 9 */
   -webkit-transform: rotate(300deg);	/* Safari and Chrome */
   -o-transform: rotate(300deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(300deg);		/* Firefox */
+  -moz-transform: rotate(300deg);		/* Firefox */
 }
 
 .rotate330 {
@@ -208,7 +227,7 @@
   -ms-transform: rotate(330deg);		/* IE 9 */
   -webkit-transform: rotate(330deg);	/* Safari and Chrome */
   -o-transform: rotate(330deg);		/* Opera */
-  -moz-transform: scale(0.5) rotate(330deg);		/* Firefox */
+  -moz-transform: rotate(330deg);		/* Firefox */
 }
 
 .rotater80 {

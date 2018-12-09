@@ -25,6 +25,8 @@ export default class BasinComponent {
 
     e.stopPropagation();
 
+    console.log('basin event, color dense');
+
     this.filter.setSaturationAmplifyOnce(value);
   }
 }

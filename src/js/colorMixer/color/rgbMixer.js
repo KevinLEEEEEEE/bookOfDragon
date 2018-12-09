@@ -100,6 +100,8 @@ export default class RgbMixer {
 
     this._updateQuantity(quantity);
 
+    console.log(`update rgb mixer to r: ${this.rgb.r}, g: ${this.rgb.g}, b: ${this.rgb.b}`);
+
     // @ts-ignore
     this.notify();
   }

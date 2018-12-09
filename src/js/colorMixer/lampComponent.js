@@ -25,6 +25,8 @@ export default class LampComponent {
 
     e.stopPropagation();
 
+    console.log('lamp event, color brightness');
+
     this.filter.setSaturationAmplify(level);
   }
 }

@@ -9,33 +9,6 @@ class Pigment extends HTMLElement {
     return ['color', 'surplus'];
   }
 
-  // @ts-ignore
-  get template() {
-    return `
-      <style>
-        ${this.styleText}
-      </style>
-
-      <div class='pigmentContainer'>
-        <img src="./src/image/pigment0.png" alt="pigment">
-      </div>
-    `;
-  }
-
-  // @ts-ignore
-  get styleText() {
-    return `
-      .pigmentContainer {
-        background-color: ${this.color};
-        font-size: 0;
-      }
-
-      img { 
-        transform: scale(1.02);
-      }
-    `;
-  }
-
   color = 'gray';
 
   surplus = MAX_USE_TIME;
@@ -75,9 +48,7 @@ class Pigment extends HTMLElement {
 
     switch (name) {
       case 'color':
-        this.color = newValue;
-
-        this.updateColor();
+        this.updateColor(newValue);
         break;
       case 'surplus':
         this.updateSurplus(newValue);
@@ -89,7 +60,7 @@ class Pigment extends HTMLElement {
   initNodes() {
     const ele = this.shadowRoot;
 
-    this.styleNode = ele.querySelector('style');
+    this.styleNode = ele.querySelectorAll('style')[1];
 
     this.imageNode = ele.querySelector('img');
   }
@@ -115,7 +86,9 @@ class Pigment extends HTMLElement {
   squeezePigment = () => {
     switch (this.surplus) {
       case 5:
+        this.updateStyle();
       case 4:
+        this.updateStyle();
       case 3:
       case 2:
       case 1:
@@ -133,7 +106,7 @@ class Pigment extends HTMLElement {
   }
 
   squeezeAnimation() {
-    this.imageNode.setAttribute('src', `./src/image/pigment${this.surplus}.png`);
+    this.imageNode.setAttribute('src', `./src/image/pigment/pigment${this.surplus}.png`);
   }
 
   dispatchSqueezeEvent() {
@@ -160,10 +133,12 @@ class Pigment extends HTMLElement {
     this.shadowRoot.dispatchEvent(useupEvent);
   }
 
-  updateColor() {
-    this.styleNode.textContent = this.styleText;
+  updateColor(value) {
+    this.color = value;
 
     this.imageNode.setAttribute('alt', `${this.color} pigment`);
+
+    this.updateStyle();
   }
 
   updateSurplus(value) {
@@ -174,6 +149,52 @@ class Pigment extends HTMLElement {
 
       this.squeezePigment();
     }
+  }
+
+  updateStyle() {
+    this.styleNode.textContent = this.styleText;
+  }
+
+  // @ts-ignore
+  get template() {
+    return `
+      <style>
+        .pigmentContainer {
+          font-size: 0;
+          -webkit-user-select:none;
+          -moz-user-select:none;
+          -ms-user-select:none;
+          user-select:none;
+        }
+
+        .pigmentColorLayer {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+        }
+      </style>
+
+      <style>
+        ${this.styleText}
+      </style>
+
+      <div class='pigmentContainer'>
+        <img src="./src/image/pigment_border.png" alt="pigment">
+        <div class="pigmentColorLayer"></div>
+      </div>
+    `;
+  }
+
+  // @ts-ignore
+  get styleText() {
+    return `
+      .pigmentColorLayer {
+        background: ${this.color};
+        mask-image: url('/src/image/pigment/pigment_mask_${this.surplus === MAX_USE_TIME ? 'full' : 'using'}.png');
+      }
+    `;
   }
 }
 

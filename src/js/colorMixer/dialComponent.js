@@ -36,6 +36,8 @@ export default class DialComponent {
 
     e.stopPropagation();
 
+    console.log('dial event, color squeeze');
+
     try {
       if (color === '#ff007f') {
         color = 'purplishRed';
@@ -49,6 +51,8 @@ export default class DialComponent {
 
   useup = (e) => {
     e.stopPropagation();
+
+    console.log('dial event, color useup');
 
     e.target.setAttribute('surplus', 5);
   }

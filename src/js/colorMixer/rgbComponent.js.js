@@ -37,6 +37,8 @@ export default class RgbComponent {
 
     e.stopPropagation();
 
+    console.log('rgb component event, color squeeze');
+
     try {
       this.mixer[`add${capital(color)}`](quantity);
     } catch (err) {

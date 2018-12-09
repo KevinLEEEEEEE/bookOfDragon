@@ -34,58 +34,67 @@ export default class RgbMixer { // hsv, currentHsv
    * @returns {{ h: number, s: number, v: number }}
    */
   getHsv() {
-    return this.hsv;
+    return this.currentHsv;
   }
 
   update() {
-    const { h, s, v } = this.mixer.getHsv();
+    this.hsv = this.mixer.getHsv();
 
-    this._mixColor(h, s, v);
+    this._mixColor();
   }
 
   /**
    * @param {number} value
    */
   setSaturationAmplify(value) {
-    this.saturationAmplify = value;
+    this.saturationAmplify += Math.round(value);
 
-    this._mixColor(this.hsv.h, this.hsv.s, this.hsv.v);
+    this._mixColor();
   }
 
-  /**
-   * @param {number} value
-   */
-  setSaturationAmplifyOnce(value) {
-    this._mixColor(this.hsv.h, this.hsv.s + value, this.hsv.v);
+  resetSaturationAmplify() {
+    this.saturationAmplify = 0;
+
+    this._mixColor();
   }
 
   /**
    * @param {number} value
    */
   setBrightnessAmplify(value) {
-    this.brightnessAmplify = value;
+    this.brightnessAmplify += Math.round(value);
 
-    this._mixColor(this.hsv.h, this.hsv.s, this.hsv.v);
+    this._mixColor();
   }
 
-  _mixColor(h, s, v) {
-    this._updateHsv(h, s, v);
+  resetBrightnessAmplify() {
+    this.brightnessAmplify = 0;
+
+    this._mixColor();
+  }
+
+
+  _mixColor() {
+    this._updateHsv();
 
     this._updateRgb();
+
+    console.log(`update hsv filter to h: ${this.hsv.h}, s: ${this.hsv.s}, v: ${this.hsv.v}`);
 
     // @ts-ignore
     this.notify();
   }
 
-  _updateHsv(h, s, v) {
-    s = this._limitValueBetween(s + this.saturationAmplify, 100, 0);
-    v = this._limitValueBetween(v + this.brightnessAmplify, 100, 0);
+  _updateHsv() {
+    const h = this.hsv.h;
+    const s = this._limitValueBetween(this.hsv.s + this.saturationAmplify, 100, 0);
+    const v = this._limitValueBetween(this.hsv.v + this.brightnessAmplify, 100, 0);
 
-    this.hsv = { h, s: Math.round(s), v: Math.round(v) };
+    this.currentHsv = { h, s, v };
   }
 
   _updateRgb() {
-    this.rgb = this.colorConverter.hsvToRgb(this.hsv.h, this.hsv.s, this.hsv.v);
+    this.rgb = this.colorConverter.hsvToRgb(this.currentHsv.h, this.currentHsv.s, this.currentHsv.v);
   }
 
   _limitValueBetween(value, max, min) {
