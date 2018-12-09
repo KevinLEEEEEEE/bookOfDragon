@@ -1,8 +1,7 @@
-Webpack 4 Boilerplate
+colorMixer
 ===========
 
-[![Dependency Status](https://david-dm.org/cvgellhorn/webpack-boilerplate.svg)](https://david-dm.org/cvgellhorn/webpack-boilerplate) 
-[![devDependency Status](https://david-dm.org/cvgellhorn/webpack-boilerplate/dev-status.svg)](https://david-dm.org/cvgellhorn/webpack-boilerplate)
+![image](https://github.com/KevinLEEEEEEE/bookOfDragon/blob/master/src/image/xwz.jpg)
 
 > Plain webpack 4 boilerplate with Babel, SASS and lodash on board
 
