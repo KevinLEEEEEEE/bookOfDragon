@@ -9,7 +9,7 @@ class Moon extends HTMLElement {
     return ['phase', 'color'];
   }
 
-  color = 'red';
+  color = 'white';
 
   styleNode;
 

@@ -181,7 +181,7 @@ class Pigment extends HTMLElement {
       </style>
 
       <div class='pigmentContainer'>
-        <img src="./src/image/pigment_border.png" alt="pigment">
+        <img src="./src/image/pigment/pigment5.png" alt="pigment">
         <div class="pigmentColorLayer"></div>
       </div>
     `;

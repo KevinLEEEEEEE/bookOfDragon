@@ -126,8 +126,8 @@ class Planet extends HTMLElement {
 
         .pigmentsContainer {
           position: absolute;
-          top: 600px;
-          left: 650px;
+          top: 300px;
+          left: 215px;
         }
 
         .pointerContainer {

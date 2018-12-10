@@ -10,54 +10,35 @@ body {
 
 .littlePrince {
   position: absolute;
-  top: 550px;
-  left: 1300px;
+  top: 275px;
+  left: 600px;
 }
 
 .prince {
   position: absolute;
-  left: 1000px;
-  top: -275px;
-}
-
-.rgbMixer {
-  position: absolute;
-  left: 250px;
-  top: 200px;
-}
-
-.dialMixer {
-  position: absolute;
-  left: 2500px;
-  top: 1100px;
-  width: 1200px;
-  height: 1200px;
+  left: 600px;
+  top: -150px;
 }
 
 .shadeCanvas {
   position: absolute;
-  top: 300px;
-  left: 300px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.shadeCanvas shade-canvas {
+  width: 1500px;
+  height: 800px;
 }
 
 .invisible {
   visibility: hidden;
-}
-
-.pigment {
-  position: absolute;
-}
-
-.dialPatette {
-  position: absolute;
-  left: 300px;
-  top: 300px;
-}
-
-.lamp {
-  position: absolute;
-  top: 500px;
-  left: 0;
 }
 
 .moon {
@@ -65,6 +46,34 @@ body {
   left: 200px;
   top: 150px;
   transform: scale(1.5);
+}
+
+.star {
+  position: absolute;
+}
+
+.star1 {
+  
+}
+
+.star2 {
+  
+}
+
+.star3 {
+  
+}
+
+.star4 {
+  
+}
+
+.star5 {
+  
+}
+
+.pigment {
+  position: absolute;
 }
 
 .pig1 {
@@ -253,3 +262,29 @@ body {
   -o-transform: rotate(220deg);		/* Opera */
   -moz-transform: rotate(220deg);		/* Firefox */
 }
+
+/* .rgbMixer {
+  position: absolute;
+  left: 250px;
+  top: 200px;
+} */
+
+/* .dialMixer {
+  position: absolute;
+  left: 2500px;
+  top: 1100px;
+  width: 1200px;
+  height: 1200px;
+} */
+
+/* .dialPatette {
+  position: absolute;
+  left: 300px;
+  top: 300px;
+} */
+
+/* .lamp {
+  position: absolute;
+  top: 500px;
+  left: 0;
+} */

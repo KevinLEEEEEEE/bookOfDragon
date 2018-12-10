@@ -31,15 +31,23 @@
   </div>
 
   <div class="moon" id="moon">
-    <simple-moon color="gray" phase="0"></simple-moon>
+    <simple-moon phase="0"></simple-moon>
   </div>
 
   <button id="draftBook">notebook</button>
 
   <div class="stars" id="stars">
-    <simple-star></simple-star>
+    <simple-star class="star1 star"></simple-star>
+    <simple-star class="star2 star"></simple-star>
+    <simple-star class="star3 star"></simple-star>
+    <simple-star class="star4 star"></simple-star>
+    <simple-star class="star5 star"></simple-star>
   </div>
-  
+
+  <div class="shadeCanvas invisible" id="shadeCanvas">
+    <shade-canvas width='1500' height='800'></shade-canvas>
+  </div>
+
 
   <!-- <div class="rgbMixer" id="rgbComponent">
     <simple-palette color='red' scale='0.3'></simple-palette>
@@ -63,10 +71,6 @@
     <simple-pigment color='fuchsia' surplus='5' class="pigment pig14 rotate300"></simple-pigment>
     <simple-pigment color='#ff007f' surplus='5' class="pigment pig15 rotate330"></simple-pigment>
   </div> -->
-
-  <div class="shadeCanvas invisible" id="shadeCanvas">
-    <shade-canvas width='3000' height='1000'></shade-canvas>
-  </div>
 
   <!-- <div class="lamp" id="lamp">
     <simple-lamp></simple-lamp>

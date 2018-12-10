@@ -159,20 +159,16 @@ class Prince extends HTMLElement {
             background-image: url('./src/image/prince_walk_animation/prince_walk_1.png');
           }
 
-          25% {
+          33% {
             background-image: url('./src/image/prince_walk_animation/prince_walk_2.png');
           }
 
-          50% {
+          67% {
             background-image: url('./src/image/prince_walk_animation/prince_walk_3.png');
           }
 
-          75% {
-            background-image: url('./src/image/prince_walk_animation/prince_walk_4.png');
-          }
-
           100% {
-            background-image: url('./src/image/prince_walk_animation/prince_walk_5.png');
+            background-image: url('./src/image/prince_walk_animation/prince_walk_4.png');
           }
         }
 
@@ -182,20 +178,16 @@ class Prince extends HTMLElement {
             background-image: url('./src/image/prince_walk_animation/prince_walk_1.png');
           }
 
-          25% {
+          33% {
             background-image: url('./src/image/prince_walk_animation/prince_walk_2.png');
           }
 
-          50% {
+          67% {
             background-image: url('./src/image/prince_walk_animation/prince_walk_3.png');
           }
 
-          75% {
-            background-image: url('./src/image/prince_walk_animation/prince_walk_4.png');
-          }
-
           100% {
-            background-image: url('./src/image/prince_walk_animation/prince_walk_5.png');
+            background-image: url('./src/image/prince_walk_animation/prince_walk_4.png');
           }
         }
 
@@ -205,20 +197,16 @@ class Prince extends HTMLElement {
             background-image: url('./src/image/prince_walk_animation/prince_walk_1.png');
           }
 
-          25% {
+          33% {
             background-image: url('./src/image/prince_walk_animation/prince_walk_2.png');
           }
 
-          50% {
+          67% {
             background-image: url('./src/image/prince_walk_animation/prince_walk_3.png');
           }
 
-          75% {
-            background-image: url('./src/image/prince_walk_animation/prince_walk_4.png');
-          }
-
           100% {
-            background-image: url('./src/image/prince_walk_animation/prince_walk_5.png');
+            background-image: url('./src/image/prince_walk_animation/prince_walk_4.png');
           }
         }
       </style>
@@ -235,7 +223,8 @@ class Prince extends HTMLElement {
   get styleText() {
     return `
       .prince {
-        animation: prince_${this.state}_animation 0.5s infinite;
+        background: no-repeat;
+        animation: prince_${this.state}_animation 1s infinite linear;
       }
     `;
   }

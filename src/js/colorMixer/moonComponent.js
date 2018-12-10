@@ -15,8 +15,6 @@ export default class RgbComponent {
     this.initNode(node);
 
     this.mixer.register(this);
-
-    this.update();
   }
 
   initNode(node) {
