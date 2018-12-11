@@ -2,16 +2,19 @@
 
 export default class CanvasComponent {
   filter;
-  button;
+  openBtn;
+  closeBtn;
   component;
   shadeCanvas;
 
-  constructor(filter, node, button) {
+  constructor(filter, node, openBtn, closeBtn) {
     this.filter = filter;
 
     this.component = node;
 
-    this.button = button;
+    this.openBtn = openBtn;
+
+    this.closeBtn = closeBtn;
 
     this.initNode();
 
@@ -29,7 +32,9 @@ export default class CanvasComponent {
 
     this.shadeCanvas.addEventListener('fade', this.fade, false);
 
-    this.button.addEventListener('click', this.displayToggle, false);
+    this.openBtn.addEventListener('click', this.displayToggle, false);
+
+    this.closeBtn.addEventListener('click', this.displayToggle, false);
   }
 
   removeEvents() {
@@ -37,7 +42,9 @@ export default class CanvasComponent {
 
     this.shadeCanvas.removeEventListener('fade', this.fade, false);
 
-    this.button.removeEventListener('click', this.displayToggle, false);
+    this.openBtn.removeEventListener('click', this.displayToggle, false);
+
+    this.closeBtn.removeEventListener('click', this.displayToggle, false);
   }
 
   reset = (e) => {

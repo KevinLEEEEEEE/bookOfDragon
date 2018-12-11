@@ -28,7 +28,8 @@ import StarCompoment from './starComponent';
 // const basin = document.getElementById('basin');
 // const lamp = document.getElementById('lamp');
 const shadeCanvas = document.getElementById('shadeCanvas');
-const canvasButton = document.getElementById('draftBook');
+const cvsOpenBtn = document.getElementById('draftBookOpen');
+const cvsCloseBtn = document.getElementById('draftBookClose');
 const littlePrince = document.getElementById('littlePrince');
 const moon = document.getElementById('moon');
 const stars = document.getElementById('stars');
@@ -42,7 +43,7 @@ new MoonComponent(hsvFilter, moon);
 
 new StarCompoment(hsvFilter, stars);
 
-new CanvasComponent(hsvFilter, shadeCanvas, canvasButton);
+new CanvasComponent(hsvFilter, shadeCanvas, cvsOpenBtn, cvsCloseBtn);
 
 // new RgbComponent(rgbMixer, rgbNode);
 

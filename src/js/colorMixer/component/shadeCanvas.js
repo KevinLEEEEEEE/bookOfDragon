@@ -26,14 +26,6 @@ class ShadeCanvas extends HTMLElement {
   // @ts-ignore
   get styleText() {
     return `
-      .canvasContainer {
-        position: relative;
-      } 
-      
-      canvas {
-        position: absolute;
-        background-color: lightgray;
-      }
     `;
   }
 
@@ -248,7 +240,7 @@ class ShadeCanvas extends HTMLElement {
 
   paintCircle(x, y, radius) {
     this.context.beginPath();
-    this.context.arc(x, y, radius, 0, 2 * Math.PI, false);
+    this.context.arc(x - 150, y - 50, radius, 0, 2 * Math.PI, false); // fix required
     this.context.fill();
     this.context.closePath();
   }

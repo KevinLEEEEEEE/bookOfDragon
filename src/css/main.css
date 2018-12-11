@@ -32,9 +32,14 @@ body {
   background-color: rgba(0, 0, 0, 0.85);
 }
 
-.shadeCanvas shade-canvas {
+.canvasContainer {
+  position: relative;
   width: 1500px;
-  height: 800px;
+  height: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('../image//book.png');
 }
 
 .invisible {
@@ -43,9 +48,9 @@ body {
 
 .moon {
   position: absolute;
-  left: 200px;
-  top: 150px;
-  transform: scale(1.5);
+  left: 50px;
+  top: 50px;
+  transform: scale(1.2);
 }
 
 .star {
@@ -53,23 +58,43 @@ body {
 }
 
 .star1 {
-  
+  top: 25px;
+  left: 1800px;
+  transform: scale(0.9);
 }
 
 .star2 {
-  
+  top: 110px;
+  left: 900px;
+  transform: scale(0.8);
 }
 
 .star3 {
-  
+  top: 0;
+  left: 600px;
+  transform: scale(0.5);
 }
 
 .star4 {
-  
+  top: 425px;
+  left: 450px;
 }
 
 .star5 {
-  
+  top: 550px;
+  left: 50px;
+  transform: scale(0.6);
+}
+
+.draftBookOpen {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: 100px;
+  height: 75px;
+  border: transparent;
+  outline: none;
+  background: url('../image//book_icon.png') no-repeat;
 }
 
 .pigment {

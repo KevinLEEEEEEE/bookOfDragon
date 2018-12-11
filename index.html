@@ -34,7 +34,7 @@
     <simple-moon phase="0"></simple-moon>
   </div>
 
-  <button id="draftBook">notebook</button>
+  <button id="draftBookOpen" class="draftBookOpen"></button>
 
   <div class="stars" id="stars">
     <simple-star class="star1 star"></simple-star>
@@ -45,7 +45,10 @@
   </div>
 
   <div class="shadeCanvas invisible" id="shadeCanvas">
-    <shade-canvas width='1500' height='800'></shade-canvas>
+    <div class="canvasContainer">
+      <shade-canvas width='1200' height='800'></shade-canvas>
+    </div>
+    <button id="draftBookClose" class="draftBookclose">X</button>
   </div>
 
 
