@@ -52,3 +52,31 @@ new CanvasComponent(hsvFilter, shadeCanvas, cvsOpenBtn, cvsCloseBtn);
 // new BasinComponent(hsvFilter, basin);
 
 // new LampComponent(hsvFilter, lamp);
+
+const moonCanvas = document.getElementById('moonCanvas');
+// @ts-ignore
+const moonContext = moonCanvas.getContext('2d');
+
+const moonRadius = 200;
+
+const getCircleFromX = (x, radius) => {
+  const centerPointXOfMusk = (2 * radius ** 2 - x ** 2) / (2 * radius - 2 * x);
+  const radiusOfMusk = Math.abs(centerPointXOfMusk - x);
+  const halfRadianOfMusk = Math.asin(radius / radiusOfMusk);
+  const startAngle = Math.PI - halfRadianOfMusk;
+  const endAngle = Math.PI + halfRadianOfMusk;
+
+  return { centerPointXOfMusk, radiusOfMusk, startAngle, endAngle };
+};
+
+function drawMoon(x, radius) {
+  const { centerPointXOfMusk, radiusOfMusk, startAngle, endAngle } = getCircleFromX(x, moonRadius);
+
+  moonContext.beginPath();
+  moonContext.arc(centerPointXOfMusk, 200, radiusOfMusk, startAngle, endAngle, x >= radius);
+  moonContext.arc(200, 200, radius, 1.5 * Math.PI, 0.5 * Math.PI, true);
+  moonContext.fillStyle = 'red';
+  moonContext.fill();
+}
+
+drawMoon(100, moonRadius);

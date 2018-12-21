@@ -8,6 +8,13 @@ body {
   background-color: rgb(5, 5, 5);
 }
 
+#moonCanvas {
+  position: absolute;
+  top: 400px;
+  width: 400px;
+  height: 400px;
+}
+
 .littlePrince {
   position: absolute;
   top: 275px;
