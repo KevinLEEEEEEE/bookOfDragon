@@ -80,8 +80,8 @@ class Prince extends HTMLElement {
     return `
       <style>
         .prince {
-          width: 420px;
-          height: 580px;
+          width: 210px;
+          height: 280px;
         }
 
         @keyframes prince_stand_animation

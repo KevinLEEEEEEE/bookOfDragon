@@ -35,10 +35,7 @@ export default class RgbComponent {
 
   updatePhase() {
     const { h } = this.mixer.getHsv();
-    let phase = Math.floor(h % 60);
 
-    phase = phase === 6 ? 5 : phase;
-
-    this.moon.setAttribute('phase', phase);
+    this.moon.setAttribute('phase', h * 100 / 360);
   }
 }

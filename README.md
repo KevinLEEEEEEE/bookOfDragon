@@ -1,9 +1,20 @@
 colorMixer
 ===========
 
+## 设计稿一
+
 ![image](https://github.com/KevinLEEEEEEE/bookOfDragon/blob/master/src/image/xwz.jpg)
 
-> Plain webpack 4 boilerplate with Babel, SASS and lodash on board
+##设计稿2
+
+![image](https://github.com/KevinLEEEEEEE/bookOfDragon/blob/master/src/image/xwz2.jpg)
+
+## 如何使用
+
+1. 下载压缩包
+2. 打开 "./dist" 文件夹
+3. 打开 "index.html"
+4. 注意请用火狐浏览器打开，chrome有跨域访问限制，会影响webworker调用
 
 ## Requirements
 You only need <b>node.js</b> pre-installed and you’re good to go. 
