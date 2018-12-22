@@ -3,6 +3,10 @@
 const MAX_PHASE = 100;
 const MIN_PHASE = 0;
 const radiusOfMoon = 150;
+const xOfMoon = 150;
+const yOfMoon = 150;
+const canvasWidth = 300;
+const canvasHeight = 300;
 
 class Moon extends HTMLElement {
   // @ts-ignore
@@ -10,7 +14,7 @@ class Moon extends HTMLElement {
     return ['phase', 'color'];
   }
 
-  mirrorScale = 1;
+  isMuskReversed = -1;
 
   prevPhase = 0;
 
@@ -22,9 +26,13 @@ class Moon extends HTMLElement {
 
   styleNode;
 
-  canvasNode;
+  moonCvsNode;
 
-  context;
+  shaderMuskCvsNode;
+
+  moonCtx;
+
+  shaderMuskCtx;
 
   constructor() {
     super();
@@ -67,9 +75,19 @@ class Moon extends HTMLElement {
 
     this.styleNode = ele.querySelectorAll('style')[1];
 
-    this.canvasNode = ele.querySelector('canvas');
+    this.moonCvsNode = ele.querySelector('canvas');
 
-    this.context = this.canvasNode.getContext('2d');
+    this.moonCtx = this.moonCvsNode.getContext('2d');
+
+    this.moonCvsNode = ele.querySelectorAll('canvas')[0];
+
+    this.shaderMuskCvsNode = ele.querySelectorAll('canvas')[1];
+
+    this.moonCtx = this.moonCvsNode.getContext('2d');
+
+    this.shaderMuskCtx = this.shaderMuskCvsNode.getContext('2d');
+
+    this.shaderMuskCtx.fillStyle = 'black';
   }
 
   updatePhase(value) {
@@ -89,20 +107,15 @@ class Moon extends HTMLElement {
   }
 
   moonAnimation() {
-    const step = this.prevPhase > this.currPhase ? -1 : 1;
-    // const animationArray = [];
+    const loopTime = Math.abs(this.prevPhase - this.currPhase);
+    const step = (this.currPhase - this.prevPhase) / loopTime;
 
-    console.log('move phase from: ' + this.prevPhase + ' to: ' + this.currPhase);
+    for (let i = 0; i < loopTime; i += 1) {
+      const currPhase = this.prevPhase + i * step;
+      const x = this.calcMoonMuskXFromPhase(currPhase);
+      const isReverse = this.calcMoonMuskReverseFromPhase(currPhase);
 
-    for (let i = 0; i < Math.abs(this.prevPhase - this.currPhase); i += 1) {
-      const p = this.prevPhase + i * step;
-      const realPhase = p <= 50 ? p : 100 - p;
-      const x = 300 - 6 * realPhase;
-      const mirror = p <= 50 ? 1 : -1;
-
-      // animationArray.push([mirror, x]);
-
-      this.animationSequence.push([mirror, x]);
+      this.animationSequence.push([isReverse, x]);
     }
 
     if (this.isAnimationRunning === false) {
@@ -112,6 +125,17 @@ class Moon extends HTMLElement {
     }
   }
 
+  calcMoonMuskXFromPhase(phase) {
+    const normalizedPhase = phase <= 50 ? phase : 100 - phase;
+    const diameterOfMoon = 2 * radiusOfMoon;
+
+    return diameterOfMoon - (2 * diameterOfMoon / 100) * normalizedPhase;
+  }
+
+  calcMoonMuskReverseFromPhase(phase) {
+    return phase <= 50 ? -1 : 1;
+  }
+
   activeAnimationLoop() {
     if (this.animationSequence.length === 0) {
       this.isAnimationRunning = false;
@@ -119,45 +143,69 @@ class Moon extends HTMLElement {
       return;
     }
 
-    const [mirror, x] = this.animationSequence.shift();
+    const [isReverse, x] = this.animationSequence.shift();
 
-    if (mirror !== this.mirrorScale) {
-      this.mirrorScale = mirror;
+    this.updateMuskReverseState(isReverse);
 
-      this.updateStyle();
-    }
-
-    this.drawMoon(x, radiusOfMoon);
+    this.draw(x);
 
     setTimeout(() => {
       this.activeAnimationLoop();
     }, 20);
   }
 
-  getCircleFromX(x, radius) {
-    const centerPointXOfMusk = (2 * radius ** 2 - x ** 2) / (2 * radius - 2 * x);
+  updateMuskReverseState(isReverse) {
+    if (isReverse !== this.isMuskReversed) {
+      this.isMuskReversed = isReverse;
+
+      this.updateStyle();
+    }
+  }
+
+  draw(x) {
+    const musk = this.getMoonMuskFromX(x);
+
+    this.drawShaderMusk(x, musk);
+  }
+
+  drawMoon() {
+    this.moonCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    this.moonCtx.beginPath();
+    this.moonCtx.arc(xOfMoon, yOfMoon, radiusOfMoon, 0, 2 * Math.PI);
+    // this.moonCtx.rect(0, 0, canvasWidth, canvasHeight);
+    this.moonCtx.closePath();
+    this.moonCtx.fill();
+  }
+
+  drawShaderMusk(x, { centerPointXOfMusk, radiusOfMusk, startAngle, endAngle }) {
+    this.shaderMuskCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    this.shaderMuskCtx.beginPath();
+    this.shaderMuskCtx.arc(centerPointXOfMusk, yOfMoon, radiusOfMusk, startAngle, endAngle, x >= radiusOfMoon);
+    this.shaderMuskCtx.arc(xOfMoon, yOfMoon, radiusOfMoon + 2, 1.5 * Math.PI, 0.5 * Math.PI, false);
+    this.shaderMuskCtx.fill();
+  }
+
+  getMoonMuskFromX(x) {
+    const centerPointXOfMusk = (xOfMoon ** 2 + radiusOfMoon ** 2 - x ** 2) / (2 * xOfMoon - 2 * x);
     const radiusOfMusk = Math.abs(centerPointXOfMusk - x);
-    const halfRadianOfMusk = Math.asin(radius / radiusOfMusk);
+    const halfRadianOfMusk = Math.asin(radiusOfMoon / radiusOfMusk);
     const startAngle = Math.PI - halfRadianOfMusk;
     const endAngle = Math.PI + halfRadianOfMusk;
 
     return { centerPointXOfMusk, radiusOfMusk, startAngle, endAngle };
   }
 
-  drawMoon(x, radius) {
-    const { centerPointXOfMusk, radiusOfMusk, startAngle, endAngle } = this.getCircleFromX(x, radius);
-
-    this.context.clearRect(0, 0, 2 * radius, 2 * radius);
-    this.context.beginPath();
-    this.context.arc(centerPointXOfMusk, radius, radiusOfMusk, startAngle, endAngle, x >= radius);
-    this.context.arc(radius, radius, radius, 1.5 * Math.PI, 0.5 * Math.PI, true);
-    this.context.fill();
-  }
-
   updateColor(value) {
-    this.color = value;
+    // const grd = this.moonCtx.createRadialGradient(xOfMoon, yOfMoon, radiusOfMoon - 80, xOfMoon, yOfMoon, radiusOfMoon);
 
-    this.context.fillStyle = this.color;
+    // grd.addColorStop(0.8, value);
+    // grd.addColorStop(1, 'transparent');
+
+    // this.moonCtx.fillStyle = grd;
+
+    this.moonCtx.fillStyle = value;
+
+    this.drawMoon();
   }
 
   updateStyle() {
@@ -177,9 +225,16 @@ class Moon extends HTMLElement {
           position: absolute;
           left: 0;
           top: 0;
-          width: ${2 * radiusOfMoon}px;
-          height: ${2 * radiusOfMoon}px;
+          width: ${canvasWidth}px;
+          height: ${canvasHeight}px;
+        }
+
+        .moonCanvas {
           z-index: -1;
+        }
+
+        .moonShaderMusk {
+          z-index: 2;
         }
       </style>
 
@@ -188,8 +243,9 @@ class Moon extends HTMLElement {
       </style>
 
       <div class='moonContainer'>
-        <canvas width="${2 * radiusOfMoon}" height="${2 * radiusOfMoon}"></canvas>
-        <img src="./src/image/moonMusk.png" alt="moonMusk">
+        <canvas width="${canvasWidth}" height="${canvasHeight}" class="moonCanvas"></canvas>
+        <img src="./src/image/moonShader.png" alt="moonShader">
+        <canvas width="${canvasWidth}" height="${canvasHeight}" class="moonShaderMusk"></canvas>
       </div>
     `;
   }
@@ -197,11 +253,18 @@ class Moon extends HTMLElement {
   // @ts-ignore
   get styleText() {
     return `
-      .moonContainer canvas {
-        -moz-transform:scaleX(${this.mirrorScale});
-        -webkit-transform:scaleX(${this.mirrorScale});
-        -o-transform:scaleX(${this.mirrorScale});
-        transform:scaleX(${this.mirrorScale});
+      .moonCanvas {
+        -moz-transform:scaleX(${-this.isMuskReversed});
+        -webkit-transform:scaleX(${-this.isMuskReversed});
+        -o-transform:scaleX(${-this.isMuskReversed});
+        transform:scaleX(${-this.isMuskReversed});
+      }
+
+      .moonShaderMusk {
+        -moz-transform:scaleX(${-this.isMuskReversed});
+        -webkit-transform:scaleX(${-this.isMuskReversed});
+        -o-transform:scaleX(${-this.isMuskReversed});
+        transform:scaleX(${-this.isMuskReversed});
       }
     `;
   }
