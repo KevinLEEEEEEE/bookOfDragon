@@ -26,13 +26,11 @@ class Moon extends HTMLElement {
 
   styleNode;
 
-  moonCvsNode;
-
-  shaderMuskCvsNode;
-
   moonCtx;
 
   shaderMuskCtx;
+
+  moonDividesCtx;
 
   constructor() {
     super();
@@ -75,19 +73,13 @@ class Moon extends HTMLElement {
 
     this.styleNode = ele.querySelectorAll('style')[1];
 
-    this.moonCvsNode = ele.querySelector('canvas');
+    const cvs = ele.querySelectorAll('canvas');
 
-    this.moonCtx = this.moonCvsNode.getContext('2d');
+    this.moonCtx = cvs[0].getContext('2d');
 
-    this.moonCvsNode = ele.querySelectorAll('canvas')[0];
+    this.shaderMuskCtx = cvs[1].getContext('2d');
 
-    this.shaderMuskCvsNode = ele.querySelectorAll('canvas')[1];
-
-    this.moonCtx = this.moonCvsNode.getContext('2d');
-
-    this.shaderMuskCtx = this.shaderMuskCvsNode.getContext('2d');
-
-    this.shaderMuskCtx.fillStyle = 'black';
+    this.moonDividesCtx = cvs[2].getContext('2d');
   }
 
   updatePhase(value) {
@@ -121,7 +113,7 @@ class Moon extends HTMLElement {
     if (this.isAnimationRunning === false) {
       this.isAnimationRunning = true;
 
-      this.activeAnimationLoop();
+      this.activeAnimationLoop(25);
     }
   }
 
@@ -136,7 +128,7 @@ class Moon extends HTMLElement {
     return phase <= 50 ? -1 : 1;
   }
 
-  activeAnimationLoop() {
+  activeAnimationLoop(delay) {
     if (this.animationSequence.length === 0) {
       this.isAnimationRunning = false;
 
@@ -150,8 +142,8 @@ class Moon extends HTMLElement {
     this.draw(x);
 
     setTimeout(() => {
-      this.activeAnimationLoop();
-    }, 20);
+      this.activeAnimationLoop(delay);
+    }, delay);
   }
 
   updateMuskReverseState(isReverse) {
@@ -166,23 +158,8 @@ class Moon extends HTMLElement {
     const musk = this.getMoonMuskFromX(x);
 
     this.drawShaderMusk(x, musk);
-  }
 
-  drawMoon() {
-    this.moonCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-    this.moonCtx.beginPath();
-    this.moonCtx.arc(xOfMoon, yOfMoon, radiusOfMoon, 0, 2 * Math.PI);
-    // this.moonCtx.rect(0, 0, canvasWidth, canvasHeight);
-    this.moonCtx.closePath();
-    this.moonCtx.fill();
-  }
-
-  drawShaderMusk(x, { centerPointXOfMusk, radiusOfMusk, startAngle, endAngle }) {
-    this.shaderMuskCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-    this.shaderMuskCtx.beginPath();
-    this.shaderMuskCtx.arc(centerPointXOfMusk, yOfMoon, radiusOfMusk, startAngle, endAngle, x >= radiusOfMoon);
-    this.shaderMuskCtx.arc(xOfMoon, yOfMoon, radiusOfMoon + 2, 1.5 * Math.PI, 0.5 * Math.PI, false);
-    this.shaderMuskCtx.fill();
+    this.drawShaderDivides(x, musk);
   }
 
   getMoonMuskFromX(x) {
@@ -195,14 +172,49 @@ class Moon extends HTMLElement {
     return { centerPointXOfMusk, radiusOfMusk, startAngle, endAngle };
   }
 
+  drawShaderMusk(x, { centerPointXOfMusk, radiusOfMusk, startAngle, endAngle }) {
+    this.shaderMuskCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    this.shaderMuskCtx.beginPath();
+    this.shaderMuskCtx.arc(centerPointXOfMusk, yOfMoon, radiusOfMusk, startAngle, endAngle, x >= xOfMoon);
+    this.shaderMuskCtx.arc(xOfMoon, yOfMoon, radiusOfMoon + 2, 1.5 * Math.PI, 0.5 * Math.PI, false);
+    this.shaderMuskCtx.fill();
+  }
+
+  drawShaderDivides(x, { centerPointXOfMusk, radiusOfMusk }) {
+    if (!isFinite(radiusOfMusk)) {
+      return;
+    }
+
+    let grd = null;
+    const arg = x <= xOfMoon ? 1 : -1;
+
+    if (x < 150) {
+      grd = this.moonDividesCtx.createRadialGradient(centerPointXOfMusk, yOfMoon, radiusOfMusk, centerPointXOfMusk, yOfMoon, radiusOfMusk + 25);
+
+      grd.addColorStop(0, 'black');
+      grd.addColorStop(1, 'transparent');
+    } else {
+      grd = this.moonDividesCtx.createRadialGradient(centerPointXOfMusk, yOfMoon, radiusOfMusk - 25, centerPointXOfMusk, yOfMoon, radiusOfMusk);
+
+      grd.addColorStop(0, 'transparent');
+      grd.addColorStop(1, 'black');
+    }
+
+    this.moonDividesCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    this.moonDividesCtx.fillStyle = grd;
+    this.moonDividesCtx.fillRect(0, 0, canvasWidth, canvasHeight);
+    this.moonDividesCtx.clearRect(xOfMoon, 0, xOfMoon + radiusOfMoon * arg, canvasHeight);
+  }
+
+  drawMoon() {
+    this.moonCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    this.moonCtx.beginPath();
+    this.moonCtx.arc(xOfMoon, yOfMoon, radiusOfMoon, 0, 2 * Math.PI);
+    this.moonCtx.closePath();
+    this.moonCtx.fill();
+  }
+
   updateColor(value) {
-    // const grd = this.moonCtx.createRadialGradient(xOfMoon, yOfMoon, radiusOfMoon - 80, xOfMoon, yOfMoon, radiusOfMoon);
-
-    // grd.addColorStop(0.8, value);
-    // grd.addColorStop(1, 'transparent');
-
-    // this.moonCtx.fillStyle = grd;
-
     this.moonCtx.fillStyle = value;
 
     this.drawMoon();
@@ -229,12 +241,20 @@ class Moon extends HTMLElement {
           height: ${canvasHeight}px;
         }
 
+        .moonContainer img {
+          opacity: 0.85;
+        }
+
         .moonCanvas {
           z-index: -1;
         }
 
         .moonShaderMusk {
           z-index: 2;
+        }
+
+        .moonDivides {
+          z-index: 3;
         }
       </style>
 
@@ -244,8 +264,9 @@ class Moon extends HTMLElement {
 
       <div class='moonContainer'>
         <canvas width="${canvasWidth}" height="${canvasHeight}" class="moonCanvas"></canvas>
-        <img src="./src/image/moonShader.png" alt="moonShader">
+        <img src="./src/image/moonShader3.png" alt="moonShader">
         <canvas width="${canvasWidth}" height="${canvasHeight}" class="moonShaderMusk"></canvas>
+        <canvas width="${canvasWidth}" height="${canvasHeight}" class="moonDivides"></canvas>
       </div>
     `;
   }
@@ -261,6 +282,13 @@ class Moon extends HTMLElement {
       }
 
       .moonShaderMusk {
+        -moz-transform:scaleX(${-this.isMuskReversed});
+        -webkit-transform:scaleX(${-this.isMuskReversed});
+        -o-transform:scaleX(${-this.isMuskReversed});
+        transform:scaleX(${-this.isMuskReversed});
+      }
+
+      .moonDivides {
         -moz-transform:scaleX(${-this.isMuskReversed});
         -webkit-transform:scaleX(${-this.isMuskReversed});
         -o-transform:scaleX(${-this.isMuskReversed});
