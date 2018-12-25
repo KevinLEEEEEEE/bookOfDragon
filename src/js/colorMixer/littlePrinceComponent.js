@@ -7,7 +7,7 @@ export default class LittlePrinceComponent {
   planet;
   prince;
   component;
-  isPrinceWalking = false;
+  isPrinceRunning = false;
 
   constructor(mixer, node) {
     this.mixer = mixer;
@@ -60,19 +60,32 @@ export default class LittlePrinceComponent {
 
     console.log('little prince event, color useup');
 
-    console.log(e.target);
-
     e.target.setAttribute('surplus', 5);
   }
 
   clickPrince = () => {
-    this.isPrinceWalking = !this.isPrinceWalking;
+    this.isPrinceRunning = !this.isPrinceRunning;
+
+    this.dispatchRunningEvent();
 
     this.updateAnimation();
   }
 
+  dispatchRunningEvent() {
+    const runningEvent = new CustomEvent('running', {
+      detail: {
+        state: this.isPrinceRunning,
+      },
+      bubbles: true,
+      cancelable: true,
+      composed: true, // cross the shadow dom
+    });
+
+    this.component.dispatchEvent(runningEvent);
+  }
+
   updateAnimation() {
-    if (this.isPrinceWalking === true) {
+    if (this.isPrinceRunning === true) {
       this.prince.setAttribute('state', 'walk');
 
       this.planet.setAttribute('autorotation', '8');

@@ -125,9 +125,19 @@ class Star extends HTMLElement {
     return `
       <style>
         .moonContainer {
-          width: 300px;
-          height: 300px;
           font-size: 0;
+        }
+
+        .moonContainer::after {
+          content: '';
+          position: absolute;
+          left:0px;
+          right: 0px;        
+          bottom: 143px;
+          width: 1px;
+          height: 100vh;
+          margin: auto;
+          background-color: rgba(255, 255, 255, 0.45);
         }
       </style>
 

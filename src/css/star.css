@@ -1,0 +1,33 @@
+
+.star {
+  position: absolute;
+}
+
+.star1 {
+  top: 80px;
+  left: 1800px;
+  transform: scale(0.9);
+}
+
+.star2 {
+  top: 110px;
+  left: 900px;
+  transform: scale(0.8);
+}
+
+.star3 {
+  top: 50px;
+  left: 600px;
+  transform: scale(0.5);
+}
+
+.star4 {
+  top: 425px;
+  left: 440px;
+}
+
+.star5 {
+  top: 220px;
+  left: 1500px;
+  transform: scale(0.6);
+}

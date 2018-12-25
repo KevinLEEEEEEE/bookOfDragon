@@ -5,7 +5,26 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+}
+
+.sky {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: rgb(5, 5, 5);
+}
+
+.moon {
+  position: absolute;
+  left: 60px;
+  top: 45px;
+  -ms-transform: rotate(-20deg);
+  -webkit-transform: rotate(-20deg);
+  -o-transform: rotate(-20deg);
+  -moz-transform: rotate(-20deg);
+  transform: rotate(-20deg);
 }
 
 #moonCanvas {
@@ -18,7 +37,7 @@ body {
 .littlePrince {
   position: absolute;
   top: 275px;
-  left: 600px;
+  left: 650px;
 }
 
 .prince {
@@ -46,277 +65,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('../image//book.png');
+  background: url('../image/book/book.png');
+}
+
+.draftBookOpen {
+  position: absolute;
+  bottom: 35px;
+  left: 20px;
+  background: transparent;
+  border: transparent;
+  outline: none;
 }
 
 .invisible {
   visibility: hidden;
 }
-
-.moon {
-  position: absolute;
-  left: 60px;
-  top: 45px;
-  transform: rotate(-20deg);
-}
-
-.star {
-  position: absolute;
-}
-
-.star1 {
-  top: 25px;
-  left: 1800px;
-  transform: scale(0.9);
-}
-
-.star2 {
-  top: 110px;
-  left: 900px;
-  transform: scale(0.8);
-}
-
-.star3 {
-  top: 0;
-  left: 600px;
-  transform: scale(0.5);
-}
-
-.star4 {
-  top: 425px;
-  left: 450px;
-}
-
-.star5 {
-  top: 550px;
-  left: 50px;
-  transform: scale(0.6);
-}
-
-.draftBookOpen {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-  width: 100px;
-  height: 75px;
-  border: transparent;
-  outline: none;
-  background: url('../image//book_icon.png') no-repeat;
-}
-
-.pigment {
-  position: absolute;
-}
-
-.pig1 {
-  top: -200px;
-  left: 300px;
-}
-
-.pig2 {
-  top: 550px;
-  left: 1000px;
-}
-
-.pig3 {
-  top: 750px;
-  left: 150px;
-}
-
-.pig4 {
-  top: -150px;
-  left: 400px;
-}
-
-.pig5 {
-  top: -90px;
-  left: 580px;
-}
-
-.pig6 {
-  top: 50px;
-  left: 710px;
-}
-
-.pig7 {
-  top: 225px;
-  left: 750px;
-}
-
-.pig8 { 
-  top: 400px;
-  left: 710px; /* green */
-}
-
-.pig9 { 
-  top: 520px;
-  left: 580px; /* springgreen */
-}
-
-.pig10 {
-  top: 575px;
-  left: 400px;
-}
-
-.pig11 {
-  top: 520px;
-  left: 225px;
-}
-
-.pig12 {
-  top: 400px;
-  left: 100px;
-}
-
-.pig13 {
-  top: 225px;
-  left: 50px;
-}
-
-.pig14 {
-  top: 50px;
-  left: 75px;
-}
-
-.pig15 {
-  top: -90px;
-  left: 200px;
-}
-
-.rotate30 {
-  transform: rotate(30deg);
-  -ms-transform: rotate(30deg);		/* IE 9 */
-  -webkit-transform: rotate(30deg);	/* Safari and Chrome */
-  -o-transform: rotate(30deg);		/* Opera */
-  -moz-transform: rotate(30deg);		/* Firefox */
-}
-
-.rotate60 {
-  transform: rotate(60deg);
-  -ms-transform: rotate(60deg);		/* IE 9 */
-  -webkit-transform: rotate(60deg);	/* Safari and Chrome */
-  -o-transform: rotate(60deg);		/* Opera */
-  -moz-transform: rotate(60deg);		/* Firefox */
-}
-
-.rotate90 {
-  transform: rotate(90deg);
-  -ms-transform: rotate(90deg);		/* IE 9 */
-  -webkit-transform: rotate(90deg);	/* Safari and Chrome */
-  -o-transform: rotate(90deg);		/* Opera */
-  -moz-transform: rotate(90deg);		/* Firefox */
-}
-
-.rotate120 {
-  transform: rotate(120deg);
-  -ms-transform: rotate(120deg);		/* IE 9 */
-  -webkit-transform: rotate(120deg);	/* Safari and Chrome */
-  -o-transform: rotate(120deg);		/* Opera */
-  -moz-transform: rotate(120deg);		/* Firefox */
-}
-
-.rotate150 {
-  transform: rotate(150deg);
-  -ms-transform: rotate(150deg);		/* IE 9 */
-  -webkit-transform: rotate(150deg);	/* Safari and Chrome */
-  -o-transform: rotate(150deg);		/* Opera */
-  -moz-transform: rotate(150deg);		/* Firefox */
-}
-
-.rotate180 {
-  transform: rotate(180deg);
-  -ms-transform: rotate(180deg);		/* IE 9 */
-  -webkit-transform: rotate(180deg);	/* Safari and Chrome */
-  -o-transform: rotate(180deg);		/* Opera */
-  -moz-transform: rotate(180deg);		/* Firefox */
-}
-
-.rotate210 {
-  transform: rotate(210deg);
-  -ms-transform: rotate(210deg);		/* IE 9 */
-  -webkit-transform: rotate(210deg);	/* Safari and Chrome */
-  -o-transform: rotate(210deg);		/* Opera */
-  -moz-transform: rotate(210deg);		/* Firefox */
-}
-
-.rotate240 {
-  transform: rotate(240deg);
-  -ms-transform: rotate(240deg);		/* IE 9 */
-  -webkit-transform: rotate(240deg);	/* Safari and Chrome */
-  -o-transform: rotate(240deg);		/* Opera */
-  -moz-transform: rotate(240deg);		/* Firefox */
-}
-
-.rotate270 {
-  transform: rotate(270deg);
-  -ms-transform: rotate(270deg);		/* IE 9 */
-  -webkit-transform: rotate(270deg);	/* Safari and Chrome */
-  -o-transform: rotate(270deg);		/* Opera */
-  -moz-transform: rotate(270deg);		/* Firefox */
-}
-
-.rotate300 {
-  transform: rotate(300deg);
-  -ms-transform: rotate(300deg);		/* IE 9 */
-  -webkit-transform: rotate(300deg);	/* Safari and Chrome */
-  -o-transform: rotate(300deg);		/* Opera */
-  -moz-transform: rotate(300deg);		/* Firefox */
-}
-
-.rotate330 {
-  transform: rotate(330deg);
-  -ms-transform: rotate(330deg);		/* IE 9 */
-  -webkit-transform: rotate(330deg);	/* Safari and Chrome */
-  -o-transform: rotate(330deg);		/* Opera */
-  -moz-transform: rotate(330deg);		/* Firefox */
-}
-
-.rotater80 {
-  transform: rotate(-80deg);
-  -ms-transform: rotate(-80deg);		/* IE 9 */
-  -webkit-transform: rotate(-80deg);	/* Safari and Chrome */
-  -o-transform: rotate(-80deg);		/* Opera */
-  -moz-transform: rotate(-80deg);		/* Firefox */
-}
-
-.rotate130 {
-  transform: rotate(130deg);
-  -ms-transform: rotate(130deg);		/* IE 9 */
-  -webkit-transform: rotate(130deg);	/* Safari and Chrome */
-  -o-transform: rotate(130deg);		/* Opera */
-  -moz-transform: rotate(130deg);		/* Firefox */
-}
-
-.rotate260 {
-  transform: rotate(220deg);
-  -ms-transform: rotate(220deg);		/* IE 9 */
-  -webkit-transform: rotate(220deg);	/* Safari and Chrome */
-  -o-transform: rotate(220deg);		/* Opera */
-  -moz-transform: rotate(220deg);		/* Firefox */
-}
-
-/* .rgbMixer {
-  position: absolute;
-  left: 250px;
-  top: 200px;
-} */
-
-/* .dialMixer {
-  position: absolute;
-  left: 2500px;
-  top: 1100px;
-  width: 1200px;
-  height: 1200px;
-} */
-
-/* .dialPatette {
-  position: absolute;
-  left: 300px;
-  top: 300px;
-} */
-
-/* .lamp {
-  position: absolute;
-  top: 500px;
-  left: 0;
-} */

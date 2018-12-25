@@ -79,6 +79,8 @@ class Moon extends HTMLElement {
 
     this.shaderMuskCtx = cvs[1].getContext('2d');
 
+    this.shaderMuskCtx.fillStyle = 'rgb(5, 5, 5)';
+
     this.moonDividesCtx = cvs[2].getContext('2d');
   }
 
@@ -186,7 +188,6 @@ class Moon extends HTMLElement {
     }
 
     let grd = null;
-    const arg = x <= xOfMoon ? 1 : -1;
 
     if (x < 150) {
       grd = this.moonDividesCtx.createRadialGradient(centerPointXOfMusk, yOfMoon, radiusOfMusk, centerPointXOfMusk, yOfMoon, radiusOfMusk + 25);
@@ -197,13 +198,12 @@ class Moon extends HTMLElement {
       grd = this.moonDividesCtx.createRadialGradient(centerPointXOfMusk, yOfMoon, radiusOfMusk - 25, centerPointXOfMusk, yOfMoon, radiusOfMusk);
 
       grd.addColorStop(0, 'transparent');
-      grd.addColorStop(1, 'black');
+      grd.addColorStop(1, 'rgb(5, 5, 5)');
     }
 
     this.moonDividesCtx.clearRect(0, 0, canvasWidth, canvasHeight);
     this.moonDividesCtx.fillStyle = grd;
     this.moonDividesCtx.fillRect(0, 0, canvasWidth, canvasHeight);
-    this.moonDividesCtx.clearRect(xOfMoon, 0, xOfMoon + radiusOfMoon * arg, canvasHeight);
   }
 
   drawMoon() {
@@ -231,6 +231,7 @@ class Moon extends HTMLElement {
         .moonContainer {
           position: relative;
           font-size: 0;
+          background-color: rgb(5, 5, 5);
         }
 
         .moonContainer canvas {
@@ -244,18 +245,6 @@ class Moon extends HTMLElement {
         .moonContainer img {
           opacity: 0.85;
         }
-
-        .moonCanvas {
-          z-index: -1;
-        }
-
-        .moonShaderMusk {
-          z-index: 2;
-        }
-
-        .moonDivides {
-          z-index: 3;
-        }
       </style>
 
       <style>
@@ -264,7 +253,7 @@ class Moon extends HTMLElement {
 
       <div class='moonContainer'>
         <canvas width="${canvasWidth}" height="${canvasHeight}" class="moonCanvas"></canvas>
-        <img src="./src/image/moonShader3.png" alt="moonShader">
+        <img src="./src/image/moon/moonTexture.png" alt="moonTexture">
         <canvas width="${canvasWidth}" height="${canvasHeight}" class="moonShaderMusk"></canvas>
         <canvas width="${canvasWidth}" height="${canvasHeight}" class="moonDivides"></canvas>
       </div>

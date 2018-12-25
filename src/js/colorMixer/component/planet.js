@@ -132,8 +132,9 @@ class Planet extends HTMLElement {
 
         .pointerContainer {
           position: absolute;
-          left: calc(50% - 100px);
-          top: calc(50% - 100px);
+          left: calc(50% - 200px);
+          top: calc(50% - 200px);
+          transition: transform 0.6s ease;
         }
 
         @keyframes autororations
@@ -176,9 +177,9 @@ class Planet extends HTMLElement {
 
       <div class="planetWrapper">
         <div class="planet autororation">
-          <img src="./src/image/planet.png" alt="planet">
+          <img src="./src/image/planet/planet.png" alt="planet">
           <div class="pointerContainer">
-            <img src="./src/image/pointer.png" alt="pointer">
+            <img src="./src/image/planet/pointer.png" alt="pointer">
           </div>
           <div class="pigmentsContainer">
             <slot name="pigments"></slot>
