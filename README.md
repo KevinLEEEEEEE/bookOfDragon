@@ -2,12 +2,18 @@
 # the little prince
 
 最初，在信笔闲涂时，总会为调不出心想的那一抹颜色而心情烦躁。
+
 BUT。
+
 现在。
+
 我可以正式的说。
+
 这个问题依旧存在 U.U
 
+
 但是。
+
 在完全解释缘由，揭示现状之前，容我先回忆一遍最初的历程。
 
 ---
@@ -46,12 +52,7 @@ Build the current application
 ```sh
 $ npm run build
 ```
-
 ---
-
-## [webpack](https://webpack.js.org/)
-If you're not familiar with webpack, the [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) will serve the static files in your build folder and watch your source files for changes.
-When changes are made the bundle will be recompiled. This modified bundle is served from memory at the relative path specified in publicPath.
 
 # 最初的想法
 
