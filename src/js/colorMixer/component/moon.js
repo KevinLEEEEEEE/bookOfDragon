@@ -263,21 +263,7 @@ class Moon extends HTMLElement {
   // @ts-ignore
   get styleText() {
     return `
-      .moonCanvas {
-        -moz-transform:scaleX(${-this.isMuskReversed});
-        -webkit-transform:scaleX(${-this.isMuskReversed});
-        -o-transform:scaleX(${-this.isMuskReversed});
-        transform:scaleX(${-this.isMuskReversed});
-      }
-
-      .moonShaderMusk {
-        -moz-transform:scaleX(${-this.isMuskReversed});
-        -webkit-transform:scaleX(${-this.isMuskReversed});
-        -o-transform:scaleX(${-this.isMuskReversed});
-        transform:scaleX(${-this.isMuskReversed});
-      }
-
-      .moonDivides {
+      .moonCanvas, .moonShaderMusk, .moonDivides {
         -moz-transform:scaleX(${-this.isMuskReversed});
         -webkit-transform:scaleX(${-this.isMuskReversed});
         -o-transform:scaleX(${-this.isMuskReversed});
