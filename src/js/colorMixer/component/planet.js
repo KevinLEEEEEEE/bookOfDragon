@@ -132,7 +132,7 @@ class Planet extends HTMLElement {
 
         .pointerContainer {
           position: absolute;
-          left: calc(50% - 200px);
+          left: calc(50% - 190px);
           top: calc(50% - 200px);
           transition: transform 0.6s ease;
         }
