@@ -172,7 +172,7 @@ PS：部分软件内使用HSV（V指代Volum），这里用的还是Brightness�
 ### 项目一：CopyBoard
 
 这个是最初的制作，因为被毙了（咳咳），但是关于调色的问题是从这里发源的，也算是大家劳动的结晶吧。
-代码行数：5600+，制作三周（虽然中间有断档啦，因为有些其他事情）
+制作三周（虽然中间有断档啦，因为有些其他事情）
 
 [Github：里面有些需求分析啥的，不过不是重点](https://github.com/KevinLEEEEEEE/CopyBoard)
 
@@ -180,7 +180,7 @@ PS：部分软件内使用HSV（V指代Volum），这里用的还是Brightness�
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181230101215970.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwMTI3Mzk3,size_16,color_FFFFFF,t_70)
 ### 项目二：the little prince
 
-就是之前这么多说的，项目依旧三人完成，代码3000+行，历时1 + 1.5周，因为中间重新设计停滞了三天
+就是之前这么多说的，项目依旧三人完成，历时1 + 1.5周，因为中间重新设计停滞了三天
 
 [Github：有可执行文件，readme还没有写，懒了](https://github.com/KevinLEEEEEEE/theLittlePrince)
 
