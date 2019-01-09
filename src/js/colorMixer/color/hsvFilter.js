@@ -79,7 +79,7 @@ export default class RgbMixer { // hsv, currentHsv
 
     this._updateRgb();
 
-    console.log(`update hsv filter to h: ${this.hsv.h}, s: ${this.hsv.s}, v: ${this.hsv.v}`);
+    // console.log(`update hsv filter to h: ${this.hsv.h}, s: ${this.hsv.s}, v: ${this.hsv.v}`);
 
     // @ts-ignore
     this.notify();
